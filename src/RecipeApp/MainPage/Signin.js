@@ -2,19 +2,18 @@ import React from "react";
 import * as client from "../Clients/authClient.js";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setAccessToken,
-  setRefreshToken,
-  clearToken,
-} from "../tokenReducers.js";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+import { setAccessToken, setRefreshToken } from "../tokenReducers.js";
+
+function Signin() {
   // const [error, setError] = useState("");
   const [user, setUser] = useState({ username: "", role: "" });
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.tokenReducer.accessToken);
   const refreshToken = useSelector((state) => state.tokenReducer.refreshToken);
@@ -22,10 +21,11 @@ function Login() {
   const signin = async () => {
     try {
       const response = await client.signin(credentials);
-      console.log(response);
+
       dispatch(setAccessToken(response.accessToken));
       dispatch(setRefreshToken(response.refreshToken));
-      await posts();
+
+      navigate("/app/home");
     } catch (err) {
       // setError(err);
       console.log(err);
@@ -34,7 +34,7 @@ function Login() {
 
   const refresh = async () => {
     try {
-      const response = await client.refreshToken(refreshToken);
+      const response = await client.refreshAccessToken(refreshToken);
       console.log(response);
       dispatch(setAccessToken(response.accessToken));
     } catch (err) {
@@ -42,31 +42,9 @@ function Login() {
     }
   };
 
-  const posts = async () => {
-    try {
-      const response = await client.posts(accessToken);
-      console.log(response);
-      setUser(response);
-    } catch (err) {
-      // setError(err);
-      console.log(err);
-    }
-  };
-
-  const signout = async () => {
-    try {
-      const response = await client.signout(accessToken);
-      console.log(response);
-      dispatch(clearToken());
-    } catch (err) {
-      // setError(err);
-      console.log(err);
-    }
-  };
-
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Sign in</h1>
       {/* <p>{error}</p> */}
       <input
         type="text"
@@ -83,11 +61,10 @@ function Login() {
         }
       />
       <button onClick={signin}>Login</button>
-      <button onClick={posts}>Posts</button>
       <button onClick={refresh}>Refresh</button>
-      <button onClick={signout}>Logout</button>
 
       <div className="container">
+        <h2>Hello {user.username ? user.username : "Guest"}</h2>
         <pre>{JSON.stringify(user, null, 2)}</pre>
         <pre>{JSON.stringify(accessToken, null, 2)}</pre>
         <pre>{JSON.stringify(refreshToken, null, 2)}</pre>
@@ -97,4 +74,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signin;

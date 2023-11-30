@@ -25,26 +25,10 @@ export const signout = async (token) => {
   //   {},
   //   { withCredentials: true }
   // );
-  return response.data;
+  return response;
 };
 
-export const posts = async (token) => {
-  const response = await axios.get(`${BASE_API}/api/posts`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  // const response = await axios.get(
-  //   `${BASE_API}/api/posts`,
-  //   {},
-  //   {
-  //     withCredentials: true,
-  //   }
-  // );
-  return response.data;
-};
-
-export const refreshToken = async (token) => {
+export const refreshAccessToken = async (token) => {
   const response = await axios.post(`${AUTH_API}/token`, { token });
   return response.data;
 };
