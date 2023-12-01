@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setAccessToken, setRefreshToken } from "../tokenReducers.js";
 
 function Signin() {
-  // const [error, setError] = useState("");
+  const [error, setError] = useState({});
   const [user, setUser] = useState({ username: "", role: "" });
   const [credentials, setCredentials] = useState({
     username: "",
@@ -45,7 +45,7 @@ function Signin() {
   return (
     <div>
       <h1>Sign in</h1>
-      {/* <p>{error}</p> */}
+      {/* <pre> {JSON.stringify(error, null, 2)}</pre> */}
       <input
         type="text"
         placeholder="username"

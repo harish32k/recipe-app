@@ -11,3 +11,8 @@ export const fetchMeals = async (token) => {
   });
   return response.data;
 };
+
+export const fetchRandomTenMeals = async () => {
+  const response = await axios.get(`${MEAL_API}/randomten`);
+  return response.data;
+};
