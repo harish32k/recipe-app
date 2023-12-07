@@ -1,34 +1,34 @@
 import { useSelector } from "react-redux";
-import SampleMealPost from "./Components/SamplePost";
-import * as mealClient from "../Clients/mealClient.js";
+import * as postClient from "../Clients/postClient.js";
 import { useEffect, useState } from "react";
-import MealListFromJson from "./Components/MealListFromJson";
+import MealPost from "./Components/MealPost.js";
 
 function Home() {
   const user = useSelector((state) => state.userReducer.user);
 
-  const [mealData, setMealData] = useState(null);
+  const [posts, setPosts] = useState([]);
 
-  const getMeals = async () => {
+  const getPosts = async () => {
     try {
-      const data = await mealClient.fetchRandomTenMeals();
-      setMealData(data);
+      const data = await postClient.fetchRandomRecipe();
+      setPosts(data);
     } catch (error) {
       console.log(error.message);
     }
-    // const data = await mealClient.fetchRandomTenMeals();
-    // setMealData(data);
   };
 
   useEffect(() => {
-    getMeals();
+    getPosts();
   }, []);
+
   return (
     <div>
       <h1>Home</h1>
       <p>Home feed for user: {user.username}</p>
-      <MealListFromJson mealData={mealData} />
-      {/* <pre>{JSON.stringify(mealData, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
+      {posts.map((post, index) => (
+        <MealPost key={post._id} post={post} />
+      ))}
     </div>
   );
 }
