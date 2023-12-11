@@ -24,6 +24,7 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
+      <p>Welcome</p>
       <p>Home feed for user: {user.username}</p>
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {posts.map((post, index) => (
