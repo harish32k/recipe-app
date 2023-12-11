@@ -25,9 +25,9 @@ function Signin() {
       dispatch(setAccessToken(response.accessToken));
       dispatch(setRefreshToken(response.refreshToken));
 
-      navigate("/app/home");
+      navigate("/app/");
     } catch (err) {
-      // setError(err);
+      setError(err);
       console.log(err);
     }
   };
@@ -45,7 +45,6 @@ function Signin() {
   return (
     <div>
       <h1>Sign in</h1>
-      {/* <pre> {JSON.stringify(error, null, 2)}</pre> */}
       <input
         type="text"
         placeholder="username"
@@ -70,6 +69,7 @@ function Signin() {
         <pre>{JSON.stringify(refreshToken, null, 2)}</pre>
         <pre>{JSON.stringify(credentials, null, 2)}</pre>
       </div>
+      <pre> {JSON.stringify(error, null, 2)}</pre>
     </div>
   );
 }

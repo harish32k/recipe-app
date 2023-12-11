@@ -6,19 +6,45 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setUser, clearUser } from "../userReducers.js";
+import { clearToken } from "../tokenReducers.js";
+import * as authClient from "../Clients/authClient.js";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const accessToken = useSelector((state) => state.tokenReducer.accessToken);
+  const user = useSelector((state) => state.userReducer.user);
+
   const handleSearch = (e) => {
     e.preventDefault();
     const searchQuery = e.target.elements.searchQuery.value;
+    e.target.reset();
     navigate(`/app/search?recipeName=${searchQuery}`);
   };
+
+  const signout = async () => {
+    try {
+      const response = await authClient.signout(accessToken);
+      console.log(response);
+    } catch (err) {
+      // setError(err);
+      console.log("err ", err);
+    }
+    // dispatch(clearUser());
+    dispatch(setUser({ username: "Guest", role: "GUEST" }));
+    dispatch(clearToken());
+    navigate("/app/signin");
+  };
+
   return (
     <Navbar expand="sm" className="bg-body-tertiary mb-3">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
-          Recipe App
+          Welcome {user.username}!
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />
         <Navbar.Offcanvas
@@ -64,6 +90,22 @@ const NavigationBar = () => {
                   Area
                 </NavDropdown.Item>
               </NavDropdown>
+            </Nav>
+            <Nav>
+              {user.role === "GUEST" ? (
+                <>
+                  <Nav.Link as={Link} to="/app/signin">
+                    Sign in
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/app/signup">
+                    Sign up
+                  </Nav.Link>
+                </>
+              ) : (
+                <Nav.Link as={Button} onClick={signout}>
+                  Logout
+                </Nav.Link>
+              )}
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

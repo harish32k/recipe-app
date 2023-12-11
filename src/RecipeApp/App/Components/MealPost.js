@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const MealPost = ({ post }) => {
   const {
-    idMeal,
+    _id,
     userId,
     likeCount,
     commentCount,
@@ -30,8 +30,10 @@ const MealPost = ({ post }) => {
       />
       <Card.Body>
         <Card.Title>{strMeal}</Card.Title>
-        <Link to={`/app/profile/${userId}`}>
-          <Card.Subtitle className="mb-2 text-muted">By {userId}</Card.Subtitle>
+        <Link to={`/app/profile/${userId._id}`}>
+          <Card.Subtitle className="mb-2 text-muted">
+            By {userId.firstName + " " + userId.lastName}
+          </Card.Subtitle>
         </Link>
         <Card.Text>Category: {strCategory}</Card.Text>
         <Card.Text>Area: {strArea}</Card.Text>
@@ -39,7 +41,7 @@ const MealPost = ({ post }) => {
           <strong>Likes:</strong> {likeCount} | <strong>Comments:</strong>{" "}
           {commentCount}
         </Card.Text>
-        <Button as={Link} to={`/app/post/${idMeal}`} variant="primary">
+        <Button as={Link} to={`/app/post/${_id}`} variant="primary">
           Details
         </Button>
       </Card.Body>

@@ -24,7 +24,9 @@ function Profile() {
   };
 
   useEffect(() => {
-    fetchUserDetails();
+    if (!(currUser.role === "GUEST" && userId === currUser._id)) {
+      fetchUserDetails();
+    }
   }, []);
 
   return (

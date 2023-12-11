@@ -12,8 +12,8 @@ function App() {
       <HashRouter>
         <div>
           <Routes>
-            <Route path="/" element={<Navigate to="main" />} />
-            <Route path="/main/*" element={<MainPage />} />
+            <Route path="/" element={<Navigate to="app" />} />
+            {/* <Route path="/main/*" element={<MainPage />} /> */}
             <Route path="/app/*" element={<RecipeApp />} />
           </Routes>
         </div>

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import * as postClient from "../Clients/postClient.js";
+import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
 import MealPost from "./Components/MealPost.js";
 
@@ -10,7 +10,7 @@ function Home() {
 
   const getPosts = async () => {
     try {
-      const data = await postClient.fetchRandomRecipe();
+      const data = await recipeClient.fetchRecipeByName("fish");
       setPosts(data);
     } catch (error) {
       console.log(error.message);

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import * as postClient from "../Clients/postClient.js";
+import * as postClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import MealPost from "./Components/MealPost.js";
@@ -22,7 +22,7 @@ function Search() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [recipeName]);
 
   return (
     <div>
@@ -31,6 +31,7 @@ function Search() {
       {posts.map((post, index) => (
         <MealPost key={post._id} post={post} />
       ))}
+      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
     </div>
   );
 }

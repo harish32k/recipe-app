@@ -22,20 +22,22 @@ export const fetchRandomPosts = async (token) => {
 
 export const fetchRandomRecipe = async () => {
   const response = await axios.get(`${RECIPE_API}/randomten`);
-  return response.data.map((recipe) => {
-    return {
-      ...recipe,
-      likeCount: 10,
-      commentCount: 20,
-      userId: "654ffdd3870c092d5441bc8d",
-    };
-  });
+  // return response.data.map((recipe) => {
+  //   return {
+  //     ...recipe,
+  //     likeCount: 10,
+  //     commentCount: 20,
+  //     userId: "654ffdd3870c092d5441bc8d",
+  //   };
+  // });
+  return response.data;
 };
 
 export const fetchPostById = async (id) => {
-  //   const response = await axios.get(`${POST_API}/${id}`);
-  //   return response.data;
-  return dummyData[0];
+  const response = await axios.get(`${RECIPE_API}/id/${id}`);
+  console.log(response.data);
+  return response.data;
+  // return dummyData[0];
 };
 
 const base =

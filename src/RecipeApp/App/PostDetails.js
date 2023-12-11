@@ -1,13 +1,17 @@
-import * as postClient from "../Clients/postClient.js";
+import * as postClient from "../Clients/recipeClient.js";
+import * as likeClient from "../Clients/likeClient.js";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 
 function PostDetails() {
   const { postId } = useParams();
   const [post, setPost] = useState({});
+  const [likedBy, setLikedBy] = useState([]);
+  const [likes, setLikes] = useState({});
+
   let videoId = "";
   const fetchPostDetails = async () => {
     try {
@@ -15,6 +19,17 @@ function PostDetails() {
       setPost(response);
       console.log(response);
       videoId = getYouTubeVideoId(post.strYoutube);
+    } catch (err) {
+      // setError(err);
+      console.log("error ", err);
+    }
+  };
+
+  const fetchLikes = async () => {
+    try {
+      const response = await likeClient.fetchLikesOfPost(postId);
+      setLikes(response);
+      console.log(response);
     } catch (err) {
       // setError(err);
       console.log("error ", err);
@@ -40,15 +55,25 @@ function PostDetails() {
     return match && match[1];
   };
 
+  const renderTooltip = (props) => (
+    <Tooltip id="liked-by-tooltip" {...props}>
+      {likedBy.map((name, index) => (
+        <div key={index}>{name}</div>
+      ))}
+    </Tooltip>
+  );
+
   useEffect(() => {
     fetchPostDetails();
+    fetchLikes();
   }, []);
 
   return (
     <div>
       <h1>Post Details</h1>
+      <pre>{JSON.stringify(likes, null, 2)}</pre>
       {/* <p>Post details for post: {post.strMeal}</p> */}
-      {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+      <pre>{JSON.stringify(post, null, 2)}</pre>
 
       <Card style={{ width: "100%" }}>
         <Card.Img
@@ -59,11 +84,13 @@ function PostDetails() {
         />
         <Card.Body>
           <Card.Title>{post.strMeal}</Card.Title>
-          <Link to={`/app/profile/${post.userId}`}>
-            <Card.Subtitle className="mb-2 text-muted">
-              By {post.userId}
-            </Card.Subtitle>
-          </Link>
+          {post.userId && (
+            <Link to={`/app/profile/${post.userId._id}`}>
+              <Card.Subtitle className="mb-2 text-muted">
+                By {post.userId.firstName + " " + post.userId.lastName}
+              </Card.Subtitle>
+            </Link>
+          )}
           <Card.Text>Category: {post.strCategory}</Card.Text>
           <Card.Text>Area: {post.strArea}</Card.Text>
           {post.ingredients &&
@@ -87,6 +114,16 @@ function PostDetails() {
             <strong>Likes:</strong> {post.likeCount} |{" "}
             <strong>Comments:</strong> {post.commentCount}
           </Card.Text>
+          {/* <Card.Text>
+          <strong>Likes:</strong>{" "}
+          <OverlayTrigger
+            placement="top"
+            overlay={renderTooltip}
+            delay={{ show: 250, hide: 400 }}
+          >
+            <span>{likes}</span>
+          </OverlayTrigger>
+        </Card.Text> */}
         </Card.Body>
       </Card>
     </div>
