@@ -35,8 +35,11 @@ const MealPost = ({ post }) => {
             By {userId.firstName + " " + userId.lastName}
           </Card.Subtitle>
         </Link>
-        <Card.Text>Category: {strCategory}</Card.Text>
-        <Card.Text>Area: {strArea}</Card.Text>
+
+        {strCategory && <Card.Text>Category: {strCategory}</Card.Text>}
+        {strArea && <Card.Text>Area: {strArea}</Card.Text>}
+        {/* <Card.Text>Category: {strCategory}</Card.Text>
+        <Card.Text>Area: {strArea}</Card.Text> */}
         <Card.Text>
           <strong>Likes:</strong> {likeCount} | <strong>Comments:</strong>{" "}
           {commentCount}

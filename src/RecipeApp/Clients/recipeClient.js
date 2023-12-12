@@ -9,6 +9,26 @@ export const fetchRecipeByName = async (name) => {
   return response.data;
 };
 
+export const fetchCategories = async () => {
+  const response = await axios.get(`${BASE_API}/api/categories`);
+  return response.data;
+};
+
+export const fetchCategoryByName = async (category) => {
+  const response = await axios.get(`${RECIPE_API}/category/${category}`);
+  return response.data;
+};
+
+export const fetchAreas = async () => {
+  const response = await axios.get(`${BASE_API}/api/areas`);
+  return response.data;
+};
+
+export const fetchAreaByName = async (area) => {
+  const response = await axios.get(`${RECIPE_API}/area/${area}`);
+  return response.data;
+};
+
 // Q auth needed for fetching posts? prolly no
 export const fetchRandomPosts = async (token) => {
   //   const response = await axios.get(`${POST_API}/random`, {

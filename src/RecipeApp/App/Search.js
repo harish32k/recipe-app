@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import * as postClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useState } from "react";
-import MealPost from "./Components/MealPost.js";
+import MealPost from "./MealPost.js";
 
 function Search() {
   const { search } = useLocation();

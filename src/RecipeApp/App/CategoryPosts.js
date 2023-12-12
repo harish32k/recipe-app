@@ -1,16 +1,15 @@
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import MealPost from "./MealPost";
 import * as recipeClient from "../Clients/recipeClient.js";
-import { useEffect, useState } from "react";
-import MealPost from "./MealPost.js";
+import { useParams } from "react-router-dom";
 
-function Home() {
-  const user = useSelector((state) => state.userReducer.user);
-
+function CategoryPosts() {
+  const { category } = useParams();
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
     try {
-      const data = await recipeClient.fetchRecipeByName("fish");
+      const data = await recipeClient.fetchCategoryByName(category);
       setPosts(data);
     } catch (error) {
       console.log(error.message);
@@ -23,9 +22,7 @@ function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
-      <p>Welcome</p>
-      <p>Home feed for user: {user.username}</p>
+      <h1>{category}</h1>
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {posts.map((post, index) => (
         <MealPost key={post._id} post={post} />
@@ -34,4 +31,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default CategoryPosts;

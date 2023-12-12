@@ -63,6 +63,7 @@ const NavigationBar = () => {
                 Home
               </Nav.Link>
               <Nav.Link as={Link} to="/app/profile">
+                {/* <Nav.Link as={Link} to={`/app/user/${user._id}`}> */}
                 Profile
               </Nav.Link>
             </Nav>

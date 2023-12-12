@@ -14,6 +14,13 @@ import PostDetails from "./PostDetails.js";
 import NavigationBar from "../Nav/NavigationBar.js";
 import Signup from "./Signup.js";
 import Signin from "./Signin.js";
+import Categories from "./Categories.js";
+import Areas from "./Areas.js";
+import CategoryPosts from "./CategoryPosts.js";
+import AreasPosts from "./AreasPosts.js";
+import UserProfile from "./UserProfile.js";
+import PersonalComponent from "./Components/PersonalComponent.js";
+import HistoryComponent from "./Components/HistoryComponent.js";
 
 function RecipeApp() {
   const navigate = useNavigate();
@@ -51,10 +58,20 @@ function RecipeApp() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />}>
+            <Route index element={<PersonalComponent />} />
+            <Route path="history" element={<HistoryComponent />} />
+          </Route>
+          {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/search" element={<Search />} />
           <Route path="/post/:postId" element={<PostDetails />} />
+          <Route path="/category" element={<Categories />} />
+          <Route path="/category/:category" element={<CategoryPosts />} />
+          <Route path="/area" element={<Areas />} />
+          <Route path="/area/:area" element={<AreasPosts />} />
+          <Route path="/user" element={<UserProfile />} />
+          <Route path="/user/:userId" element={<UserProfile />} />
         </Routes>
         {/* </div>
         </div> */}
