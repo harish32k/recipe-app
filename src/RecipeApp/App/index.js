@@ -22,6 +22,7 @@ import HistoryComponent from "./Components/HistoryComponent.js";
 import CreatePost from "./CreatePost.js";
 import ApprovePost from "./ApprovePost.js";
 import Signup from "./Signup.js";
+import SubscriptionFeed from "./SubscriptionFeed.js";
 
 function RecipeApp() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ function RecipeApp() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/subscription" element={<SubscriptionFeed />} />
           <Route path="/profile" element={<Profile />}>
             <Route index element={<PersonalComponent />} />
             <Route path="history" element={<HistoryComponent />} />

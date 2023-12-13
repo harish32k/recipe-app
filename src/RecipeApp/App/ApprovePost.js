@@ -20,7 +20,7 @@ function ApprovePost() {
 
   const approvePost = async (postId) => {
     try {
-      await recipeClient.approvePost(postId);
+      await recipeClient.approveRecipe(postId);
       fetchPosts();
     } catch (err) {
       // setError(err);
@@ -30,7 +30,7 @@ function ApprovePost() {
 
   const deletePost = async (postId) => {
     try {
-      await recipeClient.deletePost(postId);
+      await recipeClient.deleteRecipe(postId);
       fetchPosts();
     } catch (err) {
       // setError(err);

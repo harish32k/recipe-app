@@ -27,6 +27,7 @@ const MealPost = ({ post }) => {
         src={mealThumb}
         alt={strMeal}
         style={{ objectFit: "contain", maxHeight: "250px", width: "auto" }}
+        className="mt-3"
       />
       <Card.Body>
         <Card.Title>{strMeal}</Card.Title>

@@ -3,22 +3,15 @@ import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
 import MealPost from "./MealPost.js";
 
-function Home() {
+function SubscriptionFeed() {
   const user = useSelector((state) => state.userReducer.user);
 
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
     try {
-      if (user.role === "GUEST") {
-        const data = await recipeClient.fetchCompleteRandomRecipe();
-        setPosts(data);
-      } else {
-        const data = await recipeClient.fetchRecipeByFavoriteCategoryOfUser(
-          user._id
-        );
-        setPosts(data);
-      }
+      const data = await recipeClient.fetchSubscribedRecipe(user._id);
+      setPosts(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -30,15 +23,13 @@ function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
-      {/* <p>Welcome</p>
-      <p>Home feed for user: {user.username}</p> */}
-      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
-      {posts.map((post, index) => (
+      <h1>Subscription Feed</h1>
+      {posts.length === 0 && <p>No posts to display</p>}
+      {posts.map((post) => (
         <MealPost key={post._id} post={post} />
       ))}
     </div>
   );
 }
 
-export default Home;
+export default SubscriptionFeed;
