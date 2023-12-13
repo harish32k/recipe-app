@@ -9,10 +9,8 @@ import { useSelector } from "react-redux";
 import Home from "./Home.js";
 import Profile from "./Profile.js";
 import Search from "./Search.js";
-import AppNav from "../Nav/AppNav.js";
 import PostDetails from "./PostDetails.js";
 import NavigationBar from "../Nav/NavigationBar.js";
-import Signup from "./Signup.js";
 import Signin from "./Signin.js";
 import Categories from "./Categories.js";
 import Areas from "./Areas.js";
@@ -23,6 +21,7 @@ import PersonalComponent from "./Components/PersonalComponent.js";
 import HistoryComponent from "./Components/HistoryComponent.js";
 import CreatePost from "./CreatePost.js";
 import ApprovePost from "./ApprovePost.js";
+import Signup from "./Signup.js";
 
 function RecipeApp() {
   const navigate = useNavigate();

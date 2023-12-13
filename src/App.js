@@ -2,7 +2,6 @@ import "./App.css";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
-import MainPage from "./RecipeApp/MainPage.js";
 import RecipeApp from "./RecipeApp/App/";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,7 +12,6 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Navigate to="app" />} />
-            {/* <Route path="/main/*" element={<MainPage />} /> */}
             <Route path="/app/*" element={<RecipeApp />} />
           </Routes>
         </div>

@@ -17,3 +17,8 @@ export const fetchUserById = async (id) => {
   const response = await axios.get(`${USER_API}/${id}`);
   return response.data;
 };
+
+export const signup = async (user) => {
+  const response = await axios.post(`${USER_API}`, user);
+  return response.data;
+};
