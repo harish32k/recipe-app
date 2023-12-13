@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
 import MealPost from "./MealPost.js";
+import { Button } from "react-bootstrap";
+import * as authClient from "../Clients/authClient.js";
 
 function Home() {
   const user = useSelector((state) => state.userReducer.user);
@@ -24,6 +26,15 @@ function Home() {
     }
   };
 
+  const handleVerifyAccessTokenFromCookie = async () => {
+    try {
+      const response = await authClient.verifyAccessTokenFromCookie();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getPosts();
   }, []);
@@ -31,6 +42,7 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
+      <Button onClick={handleVerifyAccessTokenFromCookie}>verify</Button>
       {/* <p>Welcome</p>
       <p>Home feed for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}

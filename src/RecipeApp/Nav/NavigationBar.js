@@ -8,15 +8,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setUser, clearUser } from "../userReducers.js";
-import { clearToken } from "../tokenReducers.js";
+import { setUser } from "../userReducers.js";
 import * as authClient from "../Clients/authClient.js";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const accessToken = useSelector((state) => state.tokenReducer.accessToken);
   const user = useSelector((state) => state.userReducer.user);
 
   const handleSearch = (e) => {
@@ -28,15 +26,12 @@ const NavigationBar = () => {
 
   const signout = async () => {
     try {
-      const response = await authClient.signout(accessToken);
+      const response = await authClient.signout();
       console.log(response);
     } catch (err) {
-      // setError(err);
       console.log("err ", err);
     }
-    // dispatch(clearUser());
     dispatch(setUser({ username: "Guest", role: "GUEST" }));
-    dispatch(clearToken());
     navigate("/app/signin");
   };
 

@@ -1,30 +1,24 @@
 import React from "react";
 import * as client from "../Clients/authClient.js";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { setAccessToken, setRefreshToken } from "../tokenReducers.js";
+import { setUser } from "../userReducers.js";
 
 function Signin() {
   const [error, setError] = useState({});
-  const [user, setUser] = useState({ username: "", role: "" });
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.tokenReducer.accessToken);
-  const refreshToken = useSelector((state) => state.tokenReducer.refreshToken);
 
   const signin = async () => {
     try {
       const response = await client.signin(credentials);
-
-      dispatch(setAccessToken(response.accessToken));
-      dispatch(setRefreshToken(response.refreshToken));
-
+      console.log("logged in user ", response);
+      dispatch(setUser(response));
       navigate("/app/");
     } catch (err) {
       setError(err);
@@ -34,11 +28,10 @@ function Signin() {
 
   const refresh = async () => {
     try {
-      const response = await client.refreshAccessToken(refreshToken);
+      const response = await client.refreshAccessToken();
       console.log(response);
-      dispatch(setAccessToken(response.accessToken));
     } catch (err) {
-      // setError(err);
+      console.log("err ", err);
     }
   };
 
@@ -63,10 +56,6 @@ function Signin() {
       <button onClick={refresh}>Refresh</button>
 
       <div className="container">
-        <h2>Hello {user.username ? user.username : "Guest"}</h2>
-        <pre>{JSON.stringify(user, null, 2)}</pre>
-        <pre>{JSON.stringify(accessToken, null, 2)}</pre>
-        <pre>{JSON.stringify(refreshToken, null, 2)}</pre>
         <pre>{JSON.stringify(credentials, null, 2)}</pre>
       </div>
       <pre> {JSON.stringify(error, null, 2)}</pre>
