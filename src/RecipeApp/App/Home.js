@@ -37,7 +37,7 @@ function Home() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -46,6 +46,7 @@ function Home() {
       {/* <p>Welcome</p>
       <p>Home feed for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
+      {posts.length === 0 && <p>No posts to display</p>}
       {posts.map((post, index) => (
         <MealPost key={post._id} post={post} />
       ))}

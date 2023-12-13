@@ -29,3 +29,8 @@ export const verifyAccessTokenFromCookie = async () => {
   const response = await request.get("/verify");
   return response.data;
 };
+
+export const fetchUserDetails = async () => {
+  const response = await request.get(`/user`);
+  return response.data;
+};
