@@ -21,6 +21,8 @@ import AreasPosts from "./AreasPosts.js";
 import UserProfile from "./UserProfile.js";
 import PersonalComponent from "./Components/PersonalComponent.js";
 import HistoryComponent from "./Components/HistoryComponent.js";
+import CreatePost from "./CreatePost.js";
+import ApprovePost from "./ApprovePost.js";
 
 function RecipeApp() {
   const navigate = useNavigate();
@@ -72,6 +74,8 @@ function RecipeApp() {
           <Route path="/area/:area" element={<AreasPosts />} />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/user/:userId" element={<UserProfile />} />
+          <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/approvePost" element={<ApprovePost />} />
         </Routes>
         {/* </div>
         </div> */}

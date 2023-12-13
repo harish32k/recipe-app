@@ -66,6 +66,16 @@ const NavigationBar = () => {
                 {/* <Nav.Link as={Link} to={`/app/user/${user._id}`}> */}
                 Profile
               </Nav.Link>
+              {user.role === "CHEF" && (
+                <Nav.Link as={Link} to="/app/createPost">
+                  Create Post
+                </Nav.Link>
+              )}
+              {user.role === "ADMIN" && (
+                <Nav.Link as={Link} to="/app/approvePost">
+                  Approvals
+                </Nav.Link>
+              )}
             </Nav>
             <Form className="d-flex" onSubmit={handleSearch}>
               <Form.Control

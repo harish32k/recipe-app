@@ -13,6 +13,7 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
   };
 
   const handleAddComment = () => {
+    console.log("newComment ", newComment);
     if (newComment.trim() !== "") {
       onAddComment(newComment);
       setNewComment("");
@@ -21,6 +22,7 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
 
   const handleDeleteComment = (commentId) => {
     onDeleteComment(commentId);
+    // console.log("delete ", commentId);
   };
 
   return (
@@ -60,7 +62,7 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
             {user._id === comment.userId._id && (
               <Button
                 variant="danger"
-                onClick={handleDeleteComment(comment._id)}
+                onClick={() => handleDeleteComment(comment._id)}
               >
                 Delete
               </Button>

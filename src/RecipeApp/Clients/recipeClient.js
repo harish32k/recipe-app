@@ -9,6 +9,21 @@ export const fetchRecipeByName = async (name) => {
   return response.data;
 };
 
+export const fetchPosts = async () => {
+  const response = await axios.get(`${RECIPE_API}/name/egg`);
+  return response.data;
+};
+
+export const approvePost = async (postId) => {
+  console.log("approve postId ", postId);
+  return postId;
+};
+
+export const deletePost = async (postId) => {
+  console.log("delete postId ", postId);
+  return postId;
+};
+
 export const fetchCategories = async () => {
   const response = await axios.get(`${BASE_API}/api/categories`);
   return response.data;
@@ -26,6 +41,11 @@ export const fetchAreas = async () => {
 
 export const fetchAreaByName = async (area) => {
   const response = await axios.get(`${RECIPE_API}/area/${area}`);
+  return response.data;
+};
+
+export const createPost = async (formData) => {
+  const response = await axios.post(`${RECIPE_API}`, formData);
   return response.data;
 };
 

@@ -17,7 +17,7 @@ export const addComment = async (recipeId, userId, strComment) => {
   return response.data;
 };
 
-export const removeComment = async (commentId) => {
-  const response = await axios.delete(`${COMMENT_API}/recipe`, { commentId });
+export const removeComment = async (_id) => {
+  const response = await axios.delete(`${COMMENT_API}/recipe/commentId/${_id}`);
   return response.data;
 };

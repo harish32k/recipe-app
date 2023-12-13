@@ -46,7 +46,7 @@ function PostDetails() {
     try {
       const response = await postClient.fetchPostById(postId);
       setPost(response);
-      console.log(response);
+      // console.log(response);
       videoId = getYouTubeVideoId(post.strYoutube);
     } catch (err) {
       // setError(err);
@@ -58,21 +58,30 @@ function PostDetails() {
     try {
       const response = await likeClient.fetchLikesOfPost(postId);
       setLikes(response);
-      console.log(response);
+      fetchLikeStatus();
     } catch (err) {
       // setError(err);
       console.log("error ", err);
     }
   };
 
-  const fetchLikeStatus = async () => {
-    try {
-      const response = await likeClient.fetchLikeStatus(postId, user._id);
-      setLikeStatus(response);
-      console.log(response);
-    } catch (err) {
-      console.log("error ", err);
+  const fetchLikeStatus = () => {
+    if (likes.length > 0) {
+      const like = likes.find((like) => like.userId._id === user._id);
+      if (like) {
+        setLikeStatus(true);
+      } else {
+        setLikeStatus(false);
+      }
     }
+    console.log("like status ", likeStatus);
+    // try {
+    //   const response = await likeClient.fetchLikeStatus(postId, user._id);
+    //   setLikeStatus(response);
+    //   console.log(response);
+    // } catch (err) {
+    //   console.log("error ", err);
+    // }
   };
 
   const fetchComments = async () => {
@@ -103,7 +112,6 @@ function PostDetails() {
         const response = await likeClient.addLike(postId, user._id);
         console.log(response);
         fetchLikes();
-        fetchLikeStatus();
       } catch (err) {
         console.log("error ", err);
       }
@@ -115,7 +123,6 @@ function PostDetails() {
       const response = await likeClient.removeLike(postId, user._id);
       console.log(response);
       fetchLikes();
-      fetchLikeStatus();
     } catch (err) {
       console.log("error ", err);
     }
@@ -154,6 +161,7 @@ function PostDetails() {
 
   const handleRemoveComment = async (commentId) => {
     try {
+      console.log("comment id ", commentId);
       const response = await commentClient.removeComment(commentId);
       fetchPostDetails();
       fetchComments();
@@ -165,17 +173,17 @@ function PostDetails() {
   useEffect(() => {
     fetchPostDetails();
     fetchLikes();
-    fetchLikeStatus();
     fetchComments();
-  }, []);
+    console.log("like status ", likeStatus);
+  }, [likeStatus]);
 
   return (
     <div>
       <h1>Post Details</h1>
-      <pre>{JSON.stringify(likeStatus, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <p>Post details for post: {post.strMeal}</p> */}
-      {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+      <pre>{JSON.stringify(post, null, 2)}</pre>
 
       <Card style={{ width: "100%" }}>
         <Card.Img
@@ -226,6 +234,7 @@ function PostDetails() {
                 <strong>Likes:</strong> {post.likeCount}
               </span>
             </OverlayTrigger>{" "}
+            <pre>{JSON.stringify(likeStatus, null, 2)}</pre>
             {likeStatus ? (
               <Button variant="danger" onClick={handleUnlike}>
                 Unlike

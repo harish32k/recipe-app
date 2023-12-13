@@ -16,10 +16,11 @@ export const addLike = async (recipeId, userId) => {
 };
 
 export const removeLike = async (recipeId, userId) => {
-  const response = await axios.delete(`${LIKE_API}/delete`, {
-    recipeId,
-    userId,
-  });
+  console.log("recipeId ", recipeId);
+  console.log("userId ", userId);
+  const response = await axios.delete(
+    `${LIKE_API}/delete/recipe/${recipeId}/user/${userId}`
+  );
   return response.data;
 };
 
