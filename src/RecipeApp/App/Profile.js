@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../Clients/userClient.js";
 import { useEffect } from "react";
 import React, { useState } from "react";
@@ -9,11 +9,15 @@ import { Outlet } from "react-router-dom";
 
 function Profile() {
   let { userId } = useParams();
+
+  console.log("here" + userId)
   const currUser = useSelector((state) => state.userReducer.user);
+  let loggedUserChecking = false;
   if (!userId) {
     userId = currUser._id;
+    loggedUserChecking = true;
   }
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ "role": "role" });
 
   const fetchUserDetails = async () => {
     try {
@@ -30,32 +34,85 @@ function Profile() {
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
       fetchUserDetails();
     }
-  }, []);
+  }, [userId]);
+
+  const navigate = useNavigate();
+  const generatePath = (path) => {
+    const basePath = !loggedUserChecking ? `${userId}` : '.';
+    console.log(`${basePath}/${path}`)
+    return (`${basePath}/${path}`);
+  };
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   return (
     <div>
       <h1>Profile</h1>
+      <br></br>
+      <div>
+        <span className="display-6 fw-normal">{user.firstName + " " + user.lastName}</span>
+        <span className="display-6 fw-lighter"> {" (@" + user.username + ")"}</span>
+        <p className="display-6 fw-lighter">{capitalizeFirstLetter(user.role.toLowerCase())}</p>
+      </div>
+
+
+      {user.role === "CHEF" ? 
+        <button className="btn btn-outline-primary">Follow</button> : <></>}
+
       {/* <p>Profile for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
+
       <Nav variant="tabs" defaultActiveKey="/">
         <Nav.Item>
-          <Nav.Link as={Link} to=".">
+          <Nav.Link as={Link} to={generatePath("")}>
             {" "}
             {/* Use relative path for Personal */}
-            Personal
+            Information
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="history">
+          <Nav.Link as={Link} to={generatePath("likes")}>
             {" "}
             {/* Use relative path for History */}
-            History
+            Likes
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link as={Link} to={generatePath("comments")}>
+            {" "}
+            {/* Use relative path for History */}
+            Comments
+          </Nav.Link>
+        </Nav.Item>
+        {user.role === "CHEF" ? <Nav.Item>
+          <Nav.Link as={Link} to={generatePath("recipes")}>
+            {" "}
+            Recipes
+          </Nav.Link>
+        </Nav.Item> : <></>}
+        <Nav.Item>
+          <Nav.Link as={Link} to={generatePath("following")}>
+            {" "}
+            Following
+          </Nav.Link>
+        </Nav.Item>
+        {user.role === "CHEF" ? <Nav.Item>
+          <Nav.Link as={Link} to={generatePath("followers")}>
+            {" "}
+            Followers
+          </Nav.Link>
+        </Nav.Item> : <></>}
+        <Nav.Item>
+          <Nav.Link as={Link} to={generatePath("user-favourites")}>
+            {" "}
+            Favourites
           </Nav.Link>
         </Nav.Item>
       </Nav>
 
       <Outlet />
-      <UserProfile user={user} />
     </div>
   );
 }

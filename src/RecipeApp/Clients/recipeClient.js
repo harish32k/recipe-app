@@ -82,3 +82,9 @@ export const fetchPostById = async (id) => {
   console.log(response.data);
   return response.data;
 };
+
+export const fetchUserRecipes = async (id) => {
+  const response = await axios.get(`${RECIPE_API}/user/${id}`);
+  //console.log(response.data);
+  return response.data;
+};

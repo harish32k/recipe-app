@@ -21,3 +21,8 @@ export const removeComment = async (_id) => {
   const response = await axios.delete(`${COMMENT_API}/recipe/commentId/${_id}`);
   return response.data;
 };
+
+export const fetchCommentsByUser = async (_id) => {
+  const response = await axios.get(`${COMMENT_API}/user/${_id}`);
+  return response.data;
+};

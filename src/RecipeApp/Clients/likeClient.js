@@ -30,3 +30,10 @@ export const fetchLikeStatus = async (recipeId, userId) => {
   );
   return response.data;
 };
+
+export const fetchPostsLikedByUser = async (userId) => {
+  const response = await axios.get(
+    `${LIKE_API}/user-liked/${userId}`
+  );
+  return response.data;
+};

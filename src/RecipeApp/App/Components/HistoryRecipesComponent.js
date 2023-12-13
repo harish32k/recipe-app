@@ -1,21 +1,12 @@
-// function PersonalComponent() {
-//   return (
-//     <div>
-//       <h1>Personal Component</h1>
-//     </div>
-//   );
-// }
-
-// export default PersonalComponent;
-
-
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userClient.js";
-import UserProfile from "../UserProfile.js";
+import * as recipeClient from "../../Clients/recipeClient.js";
+import SimpleMealPostComment from "../SimpleMealPostComment.js";
+import MealPost from "../MealPost.js";
 
-function PersonalComponent() {
+function HistoryRecipesComponent() {
 
   let { userId } = useParams();
   const currUser = useSelector((state) => state.userReducer.user);
@@ -43,12 +34,34 @@ function PersonalComponent() {
     }
   }, [userId]);
 
+
+  
+  const [posts, setPosts] = useState([]);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await recipeClient.fetchUserRecipes(userId);
+      setPosts(response);
+    } catch (err) {
+      // setError(err);
+      console.log("error ", err);
+    }
+  }
+
+  useEffect(() => {
+    if (!(currUser.role === "GUEST" && userId === currUser._id)) {
+      fetchPosts();
+    }
+  }, [userId]);
+
+
   return (
     <div>
-      <h4>Personal Information</h4>
-      <UserProfile user={user} />
+      {posts.map((post, index) => (
+        <MealPost key={post._id} post={post} />
+      ))}
     </div>
   );
 }
 
-export default PersonalComponent;
+export default HistoryRecipesComponent;
