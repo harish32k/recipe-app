@@ -42,7 +42,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (!loggedUserChecking && currUser.role === "GUEST") {
+    if (userId === "GUEST") {
       navigate("/app/");
     }
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {

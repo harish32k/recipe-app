@@ -5,10 +5,15 @@ import * as favClient from "../Clients/favouritesClient.js";
 import { useParams } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import LoginPromptModal from "./LoginPromptModal.js";
 
 function CategoryPosts() {
   const { category } = useParams();
   const [posts, setPosts] = useState([]);
+  const user = useSelector((state) => state.userReducer.user);
+
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+
   const getPosts = async () => {
     try {
       const data = await recipeClient.fetchCategoryByName(category);
@@ -42,6 +47,10 @@ function CategoryPosts() {
   }, [category]);
 
   const handleFavourite = async () => {
+    if (user.role === "GUEST") {
+      setShowLoginPrompt(true);
+      return;
+    }
     try {
       const response = await favClient.addFavouriteCategory(
         currUser._id,
@@ -65,6 +74,10 @@ function CategoryPosts() {
     }
   };
 
+  const handleCloseLoginPrompt = () => {
+    setShowLoginPrompt(false);
+  };
+
   return (
     <Container>
       <h1>{category}</h1>
@@ -80,11 +93,15 @@ function CategoryPosts() {
           Favourite
         </button>
       )}
-      <Row>
+      <Row className="mt-3">
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />
         ))}
       </Row>
+      <LoginPromptModal
+        show={showLoginPrompt}
+        handleClose={handleCloseLoginPrompt}
+      />
     </Container>
   );
 }

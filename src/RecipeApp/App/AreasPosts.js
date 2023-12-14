@@ -24,7 +24,7 @@ function AreasPosts() {
   return (
     <Container>
       <h1>{area}</h1>
-      <Row>
+      <Row className="mt-3">
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />
         ))}
