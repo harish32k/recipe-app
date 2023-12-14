@@ -61,14 +61,14 @@ function Profile() {
         <p className="display-6 fw-lighter">{capitalizeFirstLetter(user.role.toLowerCase())}</p>
       </div>
 
-      {user.role === "CHEF" && userId !== currUser._id ?
+      {user.role === "CHEF" && userId !== currUser._id && currUser.role !== "GUEST" ?
         <button className="btn btn-outline-primary">Follow</button> : <></>}
 
       {/* <p>Profile for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
 
-      <Nav variant="tabs" defaultActiveKey= {user._id !== userId ? "/likes" : "/"}>
-        {user._id !== userId ?
+      <Nav variant="tabs" defaultActiveKey= "/">
+        {user._id === currUser._id ?
           <Nav.Item>
             <Nav.Link as={Link} to={generatePath("")} isActive={pathname === `/` ? true : false}>
               {" "}

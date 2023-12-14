@@ -45,8 +45,11 @@ function PersonalComponent() {
 
   return (
     <div>
-      <h4>Personal Information</h4>
-      <UserProfile user={user} />
+      {user._id === currUser._id ?
+        <>
+          <h4>Personal Information</h4>
+          <UserProfile user={user} />
+        </> : <p>Select any of the options above.</p>}
     </div>
   );
 }
