@@ -32,7 +32,14 @@ const SimpleMealPost = ({ post }) => {
           className="mt-3"
         />
         <Card.Body>
-          <Card.Title as={Link} to={`/app/post/${_id}`}>
+          <Card.Title
+            as={Link}
+            to={`/app/post/${_id}`}
+            style={{
+              color: "#FF8C00",
+              textDecoration: "none",
+            }}
+          >
             {strMeal}
           </Card.Title>
         </Card.Body>

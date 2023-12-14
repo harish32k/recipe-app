@@ -21,6 +21,9 @@ const NavigationBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const searchQuery = e.target.elements.searchQuery.value;
+    if (!searchQuery) {
+      return;
+    }
     e.target.reset();
     navigate(`/app/search?recipeName=${searchQuery}`);
   };

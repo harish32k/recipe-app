@@ -16,8 +16,9 @@ const LikesPromptModal = ({ show, handleClose, likes }) => {
                 key={like._id}
                 to={`/app/profile/${like.userId._id}`}
                 className="list-grout-item"
+                style={{ textDecoration: "none" }}
               >
-                {like.userId.username}
+                {like.userId.firstName + " " + like.userId.lastName}
               </Link>
             ))}
           </div>

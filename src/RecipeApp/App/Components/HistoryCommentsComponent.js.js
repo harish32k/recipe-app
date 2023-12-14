@@ -57,11 +57,11 @@ function HistoryCommentsComponent() {
       {/* {posts.map((post, index) => (
         <SimpleMealPostComment key={post._id} post={post.recipe} comment={post.strComment} />
       ))} */}
-      <Row>
-        {posts.length === 0 ? (
-          <p>There is nothing to see on this page.</p>
-        ) : (
-          <ul className="list-group">
+      {posts.length === 0 ? (
+        <p>There is nothing to see on this page.</p>
+      ) : (
+        <ul className="list-group">
+          <Row>
             {posts.map((post, index) => (
               <SimpleMealPostComment
                 key={post._id}
@@ -69,9 +69,9 @@ function HistoryCommentsComponent() {
                 comment={post.strComment}
               />
             ))}
-          </ul>
-        )}
-      </Row>
+          </Row>
+        </ul>
+      )}
     </Container>
   );
 }

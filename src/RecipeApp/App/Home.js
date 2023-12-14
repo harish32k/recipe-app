@@ -30,7 +30,7 @@ function Home() {
   }, [user]);
 
   return (
-    <Container>
+    <Container className="m-1">
       <h1>Home</h1>
       {posts.length === 0 && <p>No posts to display</p>}
       <Row>

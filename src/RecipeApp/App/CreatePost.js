@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row } from "react-bootstrap";
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "../../App.css";
 
 const CreatePost = () => {
   const { id } = useParams();
@@ -191,156 +192,166 @@ const CreatePost = () => {
     <Container className="my-4" fluid="xl">
       {/* <pre>{JSON.stringify(catergories, null, 2)}</pre>
       <pre>{JSON.stringify(areas, null, 2)}</pre> */}
-      <h1>Create Post</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formStrMeal">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter title"
-            name="strMeal"
-            value={formData.strMeal}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formStrCategory">
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-            as="select"
-            name="strCategory"
-            value={formData.strCategory}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select a category</option>
-            {catergories.length > 0 &&
-              catergories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-          </Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="formStrArea">
-          <Form.Label>Area</Form.Label>
-          <Form.Control
-            as="select"
-            name="strArea"
-            value={formData.strArea}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select an area</option>
-            {areas.length > 0 &&
-              areas.map((area) => (
-                <option key={area} value={area}>
-                  {area}
-                </option>
-              ))}
-          </Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="formStrInstructions">
-          <Form.Label>Instructions</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={4}
-            placeholder="Enter instructions"
-            name="strInstructions"
-            value={formData.strInstructions}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Choose an image file</Form.Label>
-          <Form.Control type="file" onChange={handleFileChange} />
-          {base64String && (
-            <img
-              src={base64String}
-              alt="Selected"
-              className="mt-3"
-              style={{
-                objectFit: "contain",
-                maxHeight: "300px",
-                width: "auto",
-              }}
-            />
-          )}
-        </Form.Group>
-
-        <Form.Group controlId="formStrYoutube">
-          <Form.Label>YouTube URL</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter YouTube URL"
-            name="strYoutube"
-            value={formData.strYoutube}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
-
-        {/* Ingredients and Measures */}
-        <Form.Group controlId="formIngredients">
-          <Form.Label>Ingredients and Measures</Form.Label>
-          <div className="d-flex">
+      <h1 className="m-4">Create Post</h1>
+      <Row className="justify-content-center align-items-center">
+        <Form
+          onSubmit={handleSubmit}
+          style={{
+            border: "2px solid #F9A826",
+            borderRadius: "10px",
+            width: "80%",
+          }}
+          className="p-4 custom-form"
+        >
+          <Form.Group controlId="formStrMeal">
+            <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Ingredient"
-              name="newIngredient"
-              value={formData.newIngredient}
+              placeholder="Enter title"
+              name="strMeal"
+              value={formData.strMeal}
               onChange={handleInputChange}
+              required
             />
+          </Form.Group>
+
+          <Form.Group controlId="formStrCategory">
+            <Form.Label>Category</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Measure"
-              name="newMeasure"
-              value={formData.newMeasure}
+              as="select"
+              name="strCategory"
+              value={formData.strCategory}
               onChange={handleInputChange}
-            />
-            <Button
-              variant="primary"
-              onClick={handleAddIngredientAndMeasure}
-              className="ms-2"
+              required
             >
-              Add
-            </Button>
-          </div>
-          <div className="list-group">
-            {formData.ingredients.map((ingredient, index) => (
-              <div
-                key={index}
-                className="d-flex align-items-center mb-2 list-group-item"
-              >
-                <span>
-                  <strong>Ingredient: </strong>
-                  {ingredient}
-                </span>
-                <span className="ms-2">
-                  <strong>Measure: </strong>
-                  {formData.measures[index]}
-                </span>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleRemoveIngredientAndMeasure(index)}
-                  className="ms-2"
-                >
-                  Remove
-                </Button>
-              </div>
-            ))}
-          </div>
-        </Form.Group>
+              <option value="">Select a category</option>
+              {catergories.length > 0 &&
+                catergories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+            </Form.Control>
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Create Post
-        </Button>
-      </Form>
+          <Form.Group controlId="formStrArea">
+            <Form.Label>Area</Form.Label>
+            <Form.Control
+              as="select"
+              name="strArea"
+              value={formData.strArea}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Select an area</option>
+              {areas.length > 0 &&
+                areas.map((area) => (
+                  <option key={area} value={area}>
+                    {area}
+                  </option>
+                ))}
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="formStrInstructions">
+            <Form.Label>Instructions</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={4}
+              placeholder="Enter instructions"
+              name="strInstructions"
+              value={formData.strInstructions}
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Choose an image file</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
+            {base64String && (
+              <img
+                src={base64String}
+                alt="Selected"
+                className="mt-3"
+                style={{
+                  objectFit: "contain",
+                  maxHeight: "300px",
+                  width: "auto",
+                }}
+              />
+            )}
+          </Form.Group>
+
+          <Form.Group controlId="formStrYoutube">
+            <Form.Label>YouTube URL</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter YouTube URL"
+              name="strYoutube"
+              value={formData.strYoutube}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          {/* Ingredients and Measures */}
+          <Form.Group controlId="formIngredients">
+            <Form.Label>Ingredients and Measures</Form.Label>
+            <div className="d-flex">
+              <Form.Control
+                type="text"
+                placeholder="Ingredient"
+                name="newIngredient"
+                value={formData.newIngredient}
+                onChange={handleInputChange}
+              />
+              <Form.Control
+                type="text"
+                placeholder="Measure"
+                name="newMeasure"
+                value={formData.newMeasure}
+                onChange={handleInputChange}
+              />
+              <Button
+                variant="warning"
+                onClick={handleAddIngredientAndMeasure}
+                className="ms-2"
+              >
+                Add
+              </Button>
+            </div>
+            <div className="list-group">
+              {formData.ingredients.map((ingredient, index) => (
+                <div
+                  key={index}
+                  className="d-flex align-items-center mb-2 list-group-item"
+                >
+                  <span>
+                    <strong>Ingredient: </strong>
+                    {ingredient}
+                  </span>
+                  <span className="ms-2">
+                    <strong>Measure: </strong>
+                    {formData.measures[index]}
+                  </span>
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => handleRemoveIngredientAndMeasure(index)}
+                    className="ms-2"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </Form.Group>
+
+          <Button variant="success" type="submit" className="mt-3">
+            Create Post
+          </Button>
+        </Form>
+      </Row>
     </Container>
   );
 };

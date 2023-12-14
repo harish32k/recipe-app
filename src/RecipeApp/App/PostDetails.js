@@ -3,7 +3,14 @@ import * as likeClient from "../Clients/likeClient.js";
 import * as commentClient from "../Clients/commentClient.js";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+  Container,
+  Row,
+} from "react-bootstrap";
 import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -58,7 +65,7 @@ function PostDetails() {
     try {
       const response = await likeClient.fetchLikesOfPost(postId);
       setLikes(response);
-      console.log("LIKES: ", response)
+      console.log("LIKES: ", response);
       await fetchLikeStatus(postId, user);
     } catch (err) {
       // setError(err);
@@ -66,9 +73,8 @@ function PostDetails() {
     }
   };
 
-
   const fetchLikeStatus = async () => {
-    const like = await likeClient.fetchLikeStatus(postId, user._id) //likes.find((like) => like.userId._id === user._id);
+    const like = await likeClient.fetchLikeStatus(postId, user._id); //likes.find((like) => like.userId._id === user._id);
     //console.log("STATUS", like)
     if (like.liked) {
       await setLikeStatus(true);
@@ -137,7 +143,7 @@ function PostDetails() {
   const handleAddComment = async (comment) => {
     if (user.role === "GUEST") {
       setShowLoginPrompt(true);
-    } else {
+    } else if (comment.trim() !== "") {
       try {
         const response = await commentClient.addComment(
           postId,
@@ -172,95 +178,121 @@ function PostDetails() {
   }, [likeStatus, user]);
 
   return (
-    <div>
-      <h1>Post Details</h1>
+    <Container>
+      <h1 className="mb-4">Post Details</h1>
       {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <p>Post details for post: {post.strMeal}</p> */}
       {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
 
-      <Card style={{ width: "100%" }}>
-        <Card.Img
-          variant="top"
-          src={mealThumb}
-          alt={post.strMeal}
-          style={{ objectFit: "contain", maxHeight: "400px", width: "auto" }}
-        />
-        <Card.Body>
-          <Card.Title>{post.strMeal}</Card.Title>
-          {post.userId && (
-            <Link to={`/app/profile/${post.userId._id}`}>
-              <Card.Subtitle className="mb-2 text-muted">
-                By {post.userId.firstName + " " + post.userId.lastName}
-              </Card.Subtitle>
-            </Link>
-          )}
-          <Card.Text>Category: {post.strCategory}</Card.Text>
-          <Card.Text>Area: {post.strArea}</Card.Text>
-          {post.ingredients &&
-            post.measures && ( // Check if ingredients and measures exist
-              <Card.Text>
-                <strong>Ingredients:</strong>
-                <ul>
-                  {post.ingredients.map((ingredient, index) => (
-                    <li key={index}>
-                      {ingredient} - {post.measures[index]}
-                    </li>
-                  ))}
-                </ul>
-              </Card.Text>
-            )}
-          <Card.Text>
-            <strong>Instructions:</strong> {post.strInstructions}
-          </Card.Text>
-          <YouTube videoId={videoId} opts={opts} />
-          <Card.Text>
-            <OverlayTrigger
-              placement="top"
-              overlay={renderTooltip}
-              delay={{ show: 250, hide: 400 }}
-            >
-              <span
-                className="text-primary"
-                role="button"
-                onClick={handleShowLikesPrompt}
-              >
-                <strong>Likes:</strong> {post.likeCount}
-              </span>
-            </OverlayTrigger>{" "}
-            <pre>{JSON.stringify(likeStatus, null, 2)}</pre>
-            {likeStatus ? (
-              <Button variant="danger" onClick={handleUnlike}>
-                Unlike
-              </Button>
-            ) : (
-              <Button variant="success" onClick={handleLike}>
-                Like
-              </Button>
-            )}
-          </Card.Text>
-          <Card.Text>
-            <strong>Comments:</strong> {post.commentCount}
-          </Card.Text>
-          <CommentSection
-            comments={comments}
-            onAddComment={handleAddComment}
-            onDeleteComment={handleRemoveComment}
+      <Row className="justify-content-center align-items-center">
+        <Card
+          style={{ width: "85%" }}
+          className="border border-1 border-warning rounded p-5 pt-4"
+        >
+          <Card.Img
+            variant="top"
+            src={mealThumb}
+            alt={post.strMeal}
+            style={{ objectFit: "contain", maxHeight: "400px", width: "auto" }}
           />
-        </Card.Body>
-      </Card>
+          <Card.Body>
+            <Card.Title
+              as={Link}
+              to={`/app/post/${post._id}`}
+              style={{
+                color: "#FF8C00",
+                fontSize: "large",
+              }}
+            >
+              {post.strMeal}
+            </Card.Title>
 
-      <LoginPromptModal
-        show={showLoginPrompt}
-        handleClose={handleCloseLoginPrompt}
-      />
+            {post.userId &&
+              (post.userId._id === "mealDB" ? (
+                <Card.Subtitle
+                  className="mb-2 mt-2 text-muted"
+                  style={{ fontSize: "small" }}
+                >
+                  By MealDB
+                </Card.Subtitle>
+              ) : (
+                <>
+                  <br />
+                  <Card.Subtitle
+                    as={Link}
+                    to={`/app/profile/${post.userId._id}`}
+                    className="mb-2 text-muted"
+                    style={{ fontSize: "small", textDecoration: "none" }}
+                  >
+                    By {post.userId.firstName + " " + post.userId.lastName}
+                  </Card.Subtitle>
+                </>
+              ))}
 
-      <LikesPromptModal
-        show={showLikesPrompt}
-        handleClose={handleCloseLikesPrompt}
-        likes={likes}
-      />
-    </div>
+            <Card.Text>Category: {post.strCategory}</Card.Text>
+            <Card.Text>Area: {post.strArea}</Card.Text>
+            {post.ingredients &&
+              post.measures && ( // Check if ingredients and measures exist
+                <Card.Text>
+                  <strong>Ingredients:</strong>
+                  <ul>
+                    {post.ingredients.map((ingredient, index) => (
+                      <li key={index}>
+                        {ingredient} - {post.measures[index]}
+                      </li>
+                    ))}
+                  </ul>
+                </Card.Text>
+              )}
+            <Card.Text>
+              <strong>Instructions:</strong> {post.strInstructions}
+            </Card.Text>
+            <YouTube videoId={videoId} opts={opts} className="mb-2" />
+            <Card.Text>
+              <OverlayTrigger
+                placement="top"
+                overlay={renderTooltip}
+                delay={{ show: 250, hide: 400 }}
+              >
+                <span
+                  className="text-primary"
+                  role="button"
+                  onClick={handleShowLikesPrompt}
+                >
+                  <strong>Likes:</strong> {post.likeCount}
+                </span>
+              </OverlayTrigger>{" "}
+              {likeStatus ? (
+                <Button variant="danger" onClick={handleUnlike} size="sm">
+                  Unlike
+                </Button>
+              ) : (
+                <Button variant="success" onClick={handleLike} size="sm">
+                  Like
+                </Button>
+              )}
+            </Card.Text>
+            <CommentSection
+              comments={comments}
+              onAddComment={handleAddComment}
+              onDeleteComment={handleRemoveComment}
+            />
+          </Card.Body>
+        </Card>
+
+        <LoginPromptModal
+          show={showLoginPrompt}
+          handleClose={handleCloseLoginPrompt}
+        />
+
+        <LikesPromptModal
+          show={showLikesPrompt}
+          handleClose={handleCloseLikesPrompt}
+          likes={likes}
+        />
+      </Row>
+    </Container>
   );
 }
 

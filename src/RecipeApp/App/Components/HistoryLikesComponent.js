@@ -56,17 +56,17 @@ function HistoryLikesComponent() {
 
   return (
     <Container>
-      <Row>
-        {posts.length === 0 ? (
-          <p>There is nothing to see on this page.</p>
-        ) : (
-          <ul className="list-group">
+      {posts.length === 0 ? (
+        <p>There is nothing to see on this page.</p>
+      ) : (
+        <ul className="list-group">
+          <Row>
             {posts.map((post, index) => (
               <SimpleMealPost key={post._id} post={post.recipe} />
             ))}
-          </ul>
-        )}
-      </Row>
+          </Row>
+        </ul>
+      )}
     </Container>
   );
 }

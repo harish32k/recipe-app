@@ -8,7 +8,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "../../App.css";
 
 function Signin() {
-  const [error, setError] = useState({});
+  const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -23,7 +23,7 @@ function Signin() {
       dispatch(setUser(response));
       navigate("/app/");
     } catch (err) {
-      setError(err);
+      setError(err.response.data.message);
       console.log(err);
     }
   };
@@ -40,9 +40,11 @@ function Signin() {
   return (
     <div>
       <Container>
-        <Row className="justify-content-center align-items-center min-vh-100">
+        <Row className="justify-content-center align-items-center">
           <Col xs={12} md={6} lg={4}>
-            <h2 className="text-center mb-4">Recipe Social Network</h2>
+            <h2 className="text-center mb-4 mt-5">Recipe Social Network</h2>
+            {/* display error message in red text */}
+            {error && <div className="alert alert-danger">{error}</div>}
             <Form>
               <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>

@@ -12,6 +12,10 @@
   color: #fff; /* Set text color to white */
 }
 
+.navbar-custom .navbar-brand:hover {
+  color: #fff; /* Set text color to a lighter shade of orange on hover */
+}
+
 .navbar-custom .navbar-toggler-icon {
   color: #fff;
 }

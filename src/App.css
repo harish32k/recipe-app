@@ -11,6 +11,38 @@
   color: #fff; /* White text color */
 }
 
+.card-title {
+  color: "#FF8C00";
+  text-decoration: "none";
+}
+
+.custom-nav .nav-link {
+  color: #f96400 !important;
+}
+
+/* .custom-nav .nav-link.active,
+.custom-nav .nav-item.show .nav-link {
+  background-color: orange !important;
+  border-color: orange !important;
+  color: #fff !important;
+}
+
+.custom-nav .nav-item.show,
+.custom-nav .nav-item:hover,
+.custom-nav .nav-item:active {
+  background-color: orange !important;
+}
+
+.custom-nav .nav-link:hover {
+  color: #823604 !important;
+} */
+
+/* apply bold font to all the Form.Label in a Form element */
+
+.custom-form .form-label {
+  font-weight: bold;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
