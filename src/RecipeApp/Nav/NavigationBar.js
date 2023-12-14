@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUser } from "../userReducers.js";
 import * as authClient from "../Clients/authClient.js";
+import "./NavigationBar.css";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -36,39 +37,47 @@ const NavigationBar = () => {
   };
 
   return (
-    <Navbar expand="sm" className="bg-body-tertiary mb-3">
+    <Navbar expand="md" className="mb-3 navbar-custom">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           Welcome {user.username}!
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />
+        <Navbar.Toggle
+          aria-controls="offcanvasNavbar-expand-sm"
+          style={{ color: "white" }}
+        />
         <Navbar.Offcanvas
           id="offcanvasNavbar-expand-sm"
           aria-labelledby="offcanvasNavbarLabel-expand-sm"
           placement="end"
         >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">
+          <Offcanvas.Header closeButton className="navbar-custom">
+            <Offcanvas.Title
+              id="offcanvasNavbarLabel-expand-sm"
+              style={{ color: "white" }}
+            >
               Recipe App
             </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body>
+          <Offcanvas.Body className="navbar-custom">
             <Nav className="justify-content-start flex-grow-1 pe-3">
               <Nav.Link as={Link} to="/app/home">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/app/profile">
-                {/* <Nav.Link as={Link} to={`/app/user/${user._id}`}> */}
-                Profile
-              </Nav.Link>
               {user.role !== "GUEST" && (
-                <Nav.Link as={Link} to="/app/subscription">
-                  Subscriptions
-                </Nav.Link>
+                <>
+                  <Nav.Link as={Link} to="/app/profile">
+                    {/* <Nav.Link as={Link} to={`/app/user/${user._id}`}> */}
+                    Profile
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/app/subscription">
+                    Subscriptions
+                  </Nav.Link>
+                </>
               )}
               {user.role === "CHEF" && (
                 <Nav.Link as={Link} to="/app/createPost">
-                  Create Post
+                  Create
                 </Nav.Link>
               )}
               {user.role === "ADMIN" && (
@@ -85,7 +94,7 @@ const NavigationBar = () => {
                 aria-label="Search"
                 name="searchQuery"
               />
-              <Button variant="outline-success" type="submit">
+              <Button variant="outline-light" type="submit">
                 Search
               </Button>
             </Form>
@@ -113,9 +122,9 @@ const NavigationBar = () => {
                   </Nav.Link>
                 </>
               ) : (
-                <Nav.Link as={Button} onClick={signout}>
+                <Button onClick={signout} variant="outline-light">
                   Logout
-                </Nav.Link>
+                </Button>
               )}
             </Nav>
           </Offcanvas.Body>

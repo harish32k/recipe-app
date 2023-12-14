@@ -1,0 +1,32 @@
+/* Navbar */
+.navbar-custom {
+  background: linear-gradient(
+    to right,
+    #ff6f00,
+    #e65100
+  ); /* Darker orange gradient */
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+  color: #fff; /* Set text color to white */
+}
+
+.navbar-custom .navbar-toggler-icon {
+  color: #fff;
+}
+
+/* Offcanvas Body */
+.offcanvas-body-custom {
+  background-color: #ffcc80; /* Lighter orange background for offcanvas body */
+  color: #fff; /* Set text color to a darker color for better readability */
+}
+
+.white-text {
+  color: white;
+}
+
+/* Hover effect for navbar links */
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #ffc107; /* Change text color on hover to a lighter shade of orange */
+}
