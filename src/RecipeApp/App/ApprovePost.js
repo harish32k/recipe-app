@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import MealPost from "./MealPost";
 import { Container, Row } from "react-bootstrap";
+import MealPostApprove from "./MealPostApprove.js";
 
 function ApprovePost() {
   const user = useSelector((state) => state.userReducer.user);
@@ -47,22 +48,28 @@ function ApprovePost() {
     <Container>
       <h1>Approve Posts</h1>
       <Row>
-        {posts.map((post, index) => (
-          <div key={index}>
-            <button
-              onClick={() => approvePost(post._id)}
-              className="btn btn-success"
-            >
-              Approve
-            </button>
-            <button
-              onClick={() => deletePost(post._id)}
-              className="btn btn-danger"
-            >
-              Delete
-            </button>
-            <MealPost post={post} />
-          </div>
+        {posts.map((post) => (
+          // <div key={index}>
+          //   <button
+          //     onClick={() => approvePost(post._id)}
+          //     className="btn btn-success"
+          //   >
+          //     Approve
+          //   </button>
+          //   <button
+          //     onClick={() => deletePost(post._id)}
+          //     className="btn btn-danger"
+          //   >
+          //     Delete
+          //   </button>
+          //   <MealPost post={post} />
+          // </div>
+          <MealPostApprove
+            key={post._id}
+            post={post}
+            approvePost={approvePost}
+            deletePost={deletePost}
+          />
         ))}
       </Row>
     </Container>
