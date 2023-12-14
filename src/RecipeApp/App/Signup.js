@@ -66,7 +66,10 @@ const Signup = () => {
     }
     try {
       const response = await userClient.signup(formData);
-      if (response.status === 201) navigate("/app/signin");
+      if (response.status === 201) {
+        resetForm();
+        navigate("/app/signin");
+      }
     } catch (err) {
       console.log("error ", err);
     }
@@ -76,6 +79,19 @@ const Signup = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  const resetForm = () => {
+    setFormData({
+      username: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      dob: "",
+      role: "CONSUMER",
+      favoriteCategories: [],
+    });
+  };
 
   return (
     <Container className="my-4" fluid="xl">
