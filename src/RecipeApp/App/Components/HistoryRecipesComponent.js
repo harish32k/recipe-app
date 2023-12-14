@@ -6,10 +6,14 @@ import * as recipeClient from "../../Clients/recipeClient.js";
 import SimpleMealPostComment from "../SimpleMealPostComment.js";
 import MealPost from "../MealPost.js";
 import { Container, Row } from "react-bootstrap";
+import MealPostEdit from "../MealPostEdit.js";
+import { useNavigate } from "react-router-dom";
 
 function HistoryRecipesComponent() {
   let { userId } = useParams();
+  const navigate = useNavigate();
   const currUser = useSelector((state) => state.userReducer.user);
+  const [showEdit, setShowEdit] = useState(false);
   let loggedUserChecking = false;
   if (!userId) {
     userId = currUser._id;
@@ -28,10 +32,25 @@ function HistoryRecipesComponent() {
     }
   };
 
+  const deletePost = async (postId) => {
+    try {
+      await recipeClient.deleteRecipe(postId);
+      fetchPosts();
+    } catch (err) {
+      // setError(err);
+      console.log("error ", err);
+    }
+  };
+
+  const editPost = async (postId) => {
+    navigate(`/app/createPost/${postId}`);
+  };
+
   useEffect(() => {
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
       fetchUserDetails();
     }
+    setShowEdit(currUser._id === userId);
   }, [userId]);
 
   const [posts, setPosts] = useState([]);
@@ -55,9 +74,18 @@ function HistoryRecipesComponent() {
   return (
     <Container>
       <Row>
-        {posts.map((post, index) => (
-          <MealPost key={post._id} post={post} />
-        ))}
+        {posts.map((post, index) =>
+          showEdit ? (
+            <MealPostEdit
+              key={post._id}
+              post={post}
+              editPost={editPost}
+              deletePost={deletePost}
+            />
+          ) : (
+            <MealPost post={post} key={post._id} />
+          )
+        )}
       </Row>
     </Container>
   );

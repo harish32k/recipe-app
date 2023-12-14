@@ -351,7 +351,7 @@ const CreatePost = () => {
           </Form.Group>
 
           <Button variant="success" type="submit" className="mt-3">
-            Create Post
+            {id ? "Update Post" : "Create Post"}
           </Button>
         </Form>
       </Row>
