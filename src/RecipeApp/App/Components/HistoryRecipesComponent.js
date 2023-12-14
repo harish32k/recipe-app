@@ -5,9 +5,9 @@ import * as userClient from "../../Clients/userClient.js";
 import * as recipeClient from "../../Clients/recipeClient.js";
 import SimpleMealPostComment from "../SimpleMealPostComment.js";
 import MealPost from "../MealPost.js";
+import { Container, Row } from "react-bootstrap";
 
 function HistoryRecipesComponent() {
-
   let { userId } = useParams();
   const currUser = useSelector((state) => state.userReducer.user);
   let loggedUserChecking = false;
@@ -34,8 +34,6 @@ function HistoryRecipesComponent() {
     }
   }, [userId]);
 
-
-  
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
@@ -46,7 +44,7 @@ function HistoryRecipesComponent() {
       // setError(err);
       console.log("error ", err);
     }
-  }
+  };
 
   useEffect(() => {
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
@@ -54,13 +52,14 @@ function HistoryRecipesComponent() {
     }
   }, [userId]);
 
-
   return (
-    <div>
-      {posts.map((post, index) => (
-        <MealPost key={post._id} post={post} />
-      ))}
-    </div>
+    <Container>
+      <Row>
+        {posts.map((post, index) => (
+          <MealPost key={post._id} post={post} />
+        ))}
+      </Row>
+    </Container>
   );
 }
 
