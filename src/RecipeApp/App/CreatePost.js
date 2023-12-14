@@ -3,8 +3,12 @@ import { Form, Button, Container } from "react-bootstrap";
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.userReducer.user);
   const [formData, setFormData] = useState({
     strMeal: "",
@@ -21,6 +25,31 @@ const CreatePost = () => {
 
   const [catergories, setCatergories] = useState([]);
   const [areas, setAreas] = useState([]);
+
+  const fetchPost = async () => {
+    try {
+      const response = await recipeClient.fetchPostById(id);
+      console.log(response);
+      setFormData({
+        strMeal: response.strMeal,
+        strCategory: response.strCategory,
+        strArea: response.strArea,
+        strInstructions: response.strInstructions,
+        strMealThumb: response.strMealThumb,
+        strYoutube: response.strYoutube,
+        ingredients: response.ingredients,
+        measures: response.measures,
+        newIngredient: "",
+        newMeasure: "",
+      });
+      if (response.userId._id !== user._id) {
+        alert("You are not authorized to edit this post");
+        navigate("/app");
+      }
+    } catch (err) {
+      console.log("error ", err);
+    }
+  };
 
   const fetchCategories = async () => {
     try {
@@ -126,7 +155,7 @@ const CreatePost = () => {
     } = formData;
 
     try {
-      const response = await recipeClient.createPost({
+      const body = {
         strMeal,
         strCategory,
         strArea,
@@ -136,8 +165,14 @@ const CreatePost = () => {
         ingredients,
         measures,
         userId: user._id,
-      });
-      console.log(response);
+      };
+      if (id) {
+        const response = await recipeClient.updatePost(body, id);
+        console.log(response);
+      } else {
+        const response = await recipeClient.createPost(body);
+        console.log(response);
+      }
       resetForm();
     } catch (err) {
       console.log("error ", err);
@@ -147,6 +182,9 @@ const CreatePost = () => {
   useEffect(() => {
     fetchCategories();
     fetchAreas();
+    if (id) {
+      fetchPost();
+    }
   }, []);
 
   return (

@@ -48,6 +48,11 @@ export const createPost = async (formData) => {
   return response.data;
 };
 
+export const updatePost = async (formData, _id) => {
+  const response = await axios.put(`${RECIPE_API}/id/${_id}`, formData);
+  return response.data;
+};
+
 export const approveRecipe = async (_id) => {
   const response = await axios.put(`${RECIPE_API}/approve/${_id}`);
   return response.data;
