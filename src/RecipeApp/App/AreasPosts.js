@@ -24,7 +24,6 @@ function AreasPosts() {
   return (
     <Container>
       <h1>{area}</h1>
-      <pre>{JSON.stringify(posts, null, 2)}</pre>
       <Row>
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />

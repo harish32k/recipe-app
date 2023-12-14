@@ -26,7 +26,6 @@ const Signup = () => {
     try {
       const response = await recipeClient.fetchCategories();
       setCategories(response.map((category) => category.strCategory));
-      console.log(response.categories.map((category) => category.strCategory));
     } catch (err) {
       console.log("error ", err);
     }
@@ -59,15 +58,15 @@ const Signup = () => {
 
   const roles = ["CHEF", "CONSUMER", "ADMIN"];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.favoriteCategories.length === 0) {
       setError("Please select at least one favorite category");
       return;
     }
     try {
-      userClient.signup(formData);
-      navigate("/app/signin");
+      const response = await userClient.signup(formData);
+      if (response.status === 201) navigate("/app/signin");
     } catch (err) {
       console.log("error ", err);
     }

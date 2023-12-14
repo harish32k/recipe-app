@@ -56,7 +56,6 @@ const CreatePost = () => {
     try {
       const response = await recipeClient.fetchCategories();
       setCatergories(response.map((category) => category.strCategory));
-      console.log(response.categories.map((category) => category.strCategory));
     } catch (err) {
       // setError(err);
       console.log("error ", err);
