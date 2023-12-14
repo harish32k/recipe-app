@@ -20,9 +20,10 @@ import SubscriptionFeed from "./SubscriptionFeed.js";
 import FollowersComponent from "./Components/FollowersComponent.js";
 import FollowingComponent from "./Components/FollowingComponent.js";
 import FavouritesComponent from "./Components/FavouritesComponent.js";
-import HistoryRecipesComponent from "./Components/HistoryRecipesComponent.js"
+import HistoryRecipesComponent from "./Components/HistoryRecipesComponent.js";
 import HistoryLikesComponent from "./Components/HistoryLikesComponent.js";
 import HistoryCommentsComponent from "./Components/HistoryCommentsComponent.js";
+import "../../App.css";
 
 function RecipeApp() {
   return (
@@ -47,11 +48,20 @@ function RecipeApp() {
             <Route path=":userId" element={<PersonalComponent />} />
             <Route path=":userId/history" element={<HistoryComponent />} />
             <Route path=":userId/likes" element={<HistoryLikesComponent />} />
-            <Route path=":userId/comments" element={<HistoryCommentsComponent />} />
-            <Route path=":userId/recipes" element={<HistoryRecipesComponent />} />
+            <Route
+              path=":userId/comments"
+              element={<HistoryCommentsComponent />}
+            />
+            <Route
+              path=":userId/recipes"
+              element={<HistoryRecipesComponent />}
+            />
             <Route path=":userId/followers" element={<FollowersComponent />} />
             <Route path=":userId/following" element={<FollowingComponent />} />
-            <Route path=":userId/user-favourites" element={<FavouritesComponent />} />
+            <Route
+              path=":userId/user-favourites"
+              element={<FavouritesComponent />}
+            />
           </Route>
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/profile/:userId" element={<Profile />} />

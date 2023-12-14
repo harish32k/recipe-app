@@ -113,7 +113,6 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement your logic to submit the form data to the server
     console.log(formData);
     const {
       strMeal,
@@ -125,37 +124,23 @@ const CreatePost = () => {
       ingredients,
       measures,
     } = formData;
-    if (user.role === "CHEF") {
-      if (
-        !(
-          formData.strMeal &&
-          formData.strCategory &&
-          formData.strArea &&
-          formData.strInstructions &&
-          formData.ingredients.length > 0 &&
-          formData.measures.length > 0
-        )
-      ) {
-        alert("Please fill in all the fields");
-      } else {
-        try {
-          const response = await recipeClient.createPost({
-            strMeal,
-            strCategory,
-            strArea,
-            strInstructions,
-            strMealThumb,
-            strYoutube,
-            ingredients,
-            measures,
-            userId: user._id,
-          });
-          console.log(response);
-          resetForm();
-        } catch (err) {
-          console.log("error ", err);
-        }
-      }
+
+    try {
+      const response = await recipeClient.createPost({
+        strMeal,
+        strCategory,
+        strArea,
+        strInstructions,
+        strMealThumb,
+        strYoutube,
+        ingredients,
+        measures,
+        userId: user._id,
+      });
+      console.log(response);
+      resetForm();
+    } catch (err) {
+      console.log("error ", err);
     }
   };
 
@@ -178,6 +163,7 @@ const CreatePost = () => {
             name="strMeal"
             value={formData.strMeal}
             onChange={handleInputChange}
+            required
           />
         </Form.Group>
 
@@ -188,6 +174,7 @@ const CreatePost = () => {
             name="strCategory"
             value={formData.strCategory}
             onChange={handleInputChange}
+            required
           >
             <option value="">Select a category</option>
             {catergories.length > 0 &&
@@ -206,6 +193,7 @@ const CreatePost = () => {
             name="strArea"
             value={formData.strArea}
             onChange={handleInputChange}
+            required
           >
             <option value="">Select an area</option>
             {areas.length > 0 &&
@@ -226,6 +214,7 @@ const CreatePost = () => {
             name="strInstructions"
             value={formData.strInstructions}
             onChange={handleInputChange}
+            required
           />
         </Form.Group>
 
