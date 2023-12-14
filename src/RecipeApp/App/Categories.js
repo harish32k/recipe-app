@@ -24,7 +24,7 @@ function Categories() {
       <h1>Categories</h1>
       {categories &&
         categories.map((category, index) => (
-          <div key={index}>
+          <div key={index} className="text-justify mt-4">
             <h3>
               <span style={{ marginRight: "1rem" }}>
                 {category.strCategory}
@@ -32,7 +32,8 @@ function Categories() {
               <Button
                 as={Link}
                 to={`/app/category/${category.strCategory}`}
-                variant="outline-primary"
+                variant="outline-success"
+                className="float-end"
               >
                 View Recipes
               </Button>
@@ -41,8 +42,9 @@ function Categories() {
               src={category.strCategoryThumb}
               alt={category.strCategory}
               style={{ width: "100%", maxWidth: "300px" }}
-            ></img>
-            <p>{category.strCategoryDescription}</p>
+              className="mt-3"
+              ></img>
+            <p style={{ textAlign: 'justify' }} className="mt-4">{category.strCategoryDescription}</p>
           </div>
         ))}
     </Container>

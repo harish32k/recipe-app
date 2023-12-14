@@ -20,7 +20,7 @@ import CommentSection from "./CommentSection.js";
 
 function PostDetails() {
   const { postId } = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({ strYoutube: "" });
   const [likes, setLikes] = useState([]);
   const [likeStatus, setLikeStatus] = useState(false);
   const user = useSelector((state) => state.userReducer.user);
@@ -32,8 +32,9 @@ function PostDetails() {
 
   const opts = {
     width: "100%",
-    height: "auto",
-    // maxHeight: "250px",
+    height: "500px",
+    maxHeight: "100%",
+    maxWidth: "100%",
     // width: "auto",
   };
 
@@ -188,8 +189,8 @@ function PostDetails() {
       <Row className="justify-content-center align-items-center">
         <Card
           style={{ width: "100%" }}
-          // style={{ width: "85%" }}
-          // className="border border-1 border-warning rounded p-5 pt-4"
+        // style={{ width: "85%" }}
+        // className="border border-1 border-warning rounded p-5 pt-4"
         >
           <Card.Img
             variant="top"
@@ -246,10 +247,11 @@ function PostDetails() {
                   </ul>
                 </Card.Text>
               )}
-            <Card.Text>
-              <strong>Instructions:</strong> {post.strInstructions}
+            <Card.Text className="text-justify">
+              <strong>Instructions: </strong>
+              <div style={{ textAlign: 'justify' }}>{post.strInstructions}</div>
             </Card.Text>
-            <YouTube videoId={videoId} opts={opts} className="mb-2" />
+            <YouTube videoId={getYouTubeVideoId(post.strYoutube)} opts={opts} style={{ maxWidth: '70%', margin: '0 auto' }} className="mb-4" />
             <Card.Text>
               <OverlayTrigger
                 placement="top"
@@ -257,19 +259,21 @@ function PostDetails() {
                 delay={{ show: 250, hide: 400 }}
               >
                 <span
-                  className="text-primary"
+                  className="text-primary me-2"
                   role="button"
                   onClick={handleShowLikesPrompt}
                 >
-                  <strong>Likes:</strong> {post.likeCount}
+                  <strong style={{
+                    color: "#FF8C00"
+                  }}>Likes: {post.likeCount}</strong> 
                 </span>
               </OverlayTrigger>{" "}
               {likeStatus ? (
-                <Button variant="danger" onClick={handleUnlike} size="sm">
+                <Button variant="success" onClick={handleUnlike} size="sm">
                   Unlike
                 </Button>
               ) : (
-                <Button variant="success" onClick={handleLike} size="sm">
+                <Button variant="outline-success" onClick={handleLike} size="sm">
                   Like
                 </Button>
               )}

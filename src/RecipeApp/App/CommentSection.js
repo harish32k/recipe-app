@@ -47,14 +47,13 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
         </div>
       </Form>
       {comments.map((comment) => (
-        <Card key={comment._id} style={{ width: "100%", marginBottom: "10px" }}>
+        <Card key={comment._id} style={{ width: "100%", marginBottom: "10px" }} className="ms-3">
           <Card.Body>
             <Card.Title>
               <span
                 role="button"
-                className="text-primary"
                 onClick={() => navigate(`/app/profile/${comment.userId._id}`)}
-                style={{ fontSize: "medium" }}
+                style={{ fontSize: "medium", color: "#FF8C00" }}
               >
                 {comment.userId.firstName + " " + comment.userId.lastName}
               </span>

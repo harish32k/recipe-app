@@ -80,8 +80,7 @@ function CategoryPosts() {
 
   return (
     <Container>
-      <h1>{category}</h1>
-      {favouritedStatus ? (
+      <h1>{category} {favouritedStatus ? (
         <button className="btn btn-success" onClick={() => handleUnfavourite()}>
           Favourited
         </button>
@@ -92,7 +91,8 @@ function CategoryPosts() {
         >
           Favourite
         </button>
-      )}
+      )}</h1>
+      
       <Row className="mt-3">
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />

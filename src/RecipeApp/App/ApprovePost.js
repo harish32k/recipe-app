@@ -11,7 +11,7 @@ function ApprovePost() {
 
   const fetchPosts = async () => {
     try {
-      const response = await recipeClient.fetchPosts();
+      const response = await recipeClient.fetchUnapprovedPosts();
       setPosts(response);
       console.log(response);
     } catch (err) {

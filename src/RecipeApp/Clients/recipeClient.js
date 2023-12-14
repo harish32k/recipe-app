@@ -18,6 +18,11 @@ export const fetchPosts = async () => {
   return response.data;
 };
 
+export const fetchUnapprovedPosts = async () => {
+  const response = await request.get(`${RECIPE_API}/unapproved`);
+  return response.data;
+};
+
 export const fetchCategories = async () => {
   const response = await request.get(`${DOMAIN_API}/categories`);
   return response.data;

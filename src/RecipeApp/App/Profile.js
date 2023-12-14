@@ -165,7 +165,7 @@ function Profile() {
         fill
         variant="underline"
         defaultActiveKey="/"
-        className="custom-nav mt-3"
+        className="custom-nav mt-3 mb-3"
       >
         {user._id === currUser._id ? (
           <Nav.Item>

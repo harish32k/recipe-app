@@ -25,13 +25,14 @@ function Areas() {
       {/* <pre>{areas && JSON.stringify(areas, null, 2)}</pre> */}
       {areas &&
         areas.map((area, index) => (
-          <div key={index} className="container">
+          <div key={index} className="container text-justify mt-4">
             <h3>
               <span style={{ marginRight: "1rem" }}>{area.strArea}</span>
               <Button
                 as={Link}
                 to={`/app/area/${area.strArea}`}
-                variant="outline-primary"
+                variant="outline-success"
+                className="float-end"
               >
                 View Recipes
               </Button>
@@ -40,8 +41,9 @@ function Areas() {
               src={area.strAreaThumb}
               alt={area.strArea}
               style={{ width: "100%", maxWidth: "300px" }}
+              className="mt-3"
             />
-            <p>{area.strAreaDescription}</p>
+            <p style={{ textAlign: 'justify' }} className="mt-4">{area.strAreaDescription}</p>
           </div>
         ))}
     </Container>
