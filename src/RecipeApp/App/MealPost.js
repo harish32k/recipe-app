@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const MealPost = ({ post }) => {
@@ -21,35 +21,39 @@ const MealPost = ({ post }) => {
       : strMealThumb;
 
   return (
-    <Card style={{ width: "18rem", margin: "10px" }}>
-      <Card.Img
-        variant="top"
-        src={mealThumb}
-        alt={strMeal}
-        style={{ objectFit: "contain", maxHeight: "250px", width: "auto" }}
-        className="mt-3"
-      />
-      <Card.Body>
-        <Card.Title>{strMeal}</Card.Title>
-        <Link to={`/app/profile/${userId._id}`}>
-          <Card.Subtitle className="mb-2 text-muted">
-            By {userId.firstName + " " + userId.lastName}
-          </Card.Subtitle>
-        </Link>
+    <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
+      <Card style={{ width: "18rem", margin: "10px" }}>
+        <Card.Img
+          variant="top"
+          src={mealThumb}
+          alt={strMeal}
+          style={{ objectFit: "contain", maxHeight: "250px", width: "auto" }}
+          className="mt-3"
+        />
+        <Card.Body>
+          <Link to={`/app/post/${_id}`}>
+            <Card.Title>{strMeal}</Card.Title>
+          </Link>
+          {userId && userId._id === "mealDB" ? (
+            <Card.Subtitle className="mb-2 text-muted">By MealDB</Card.Subtitle>
+          ) : (
+            <Link to={`/app/profile/${userId._id}`}>
+              <Card.Subtitle className="mb-2 text-muted">
+                By {userId.firstName + " " + userId.lastName}
+              </Card.Subtitle>
+            </Link>
+          )}
 
-        {strCategory && <Card.Text>Category: {strCategory}</Card.Text>}
-        {strArea && <Card.Text>Area: {strArea}</Card.Text>}
-        {/* <Card.Text>Category: {strCategory}</Card.Text>
-        <Card.Text>Area: {strArea}</Card.Text> */}
-        <Card.Text>
-          <strong>Likes:</strong> {likeCount} | <strong>Comments:</strong>{" "}
-          {commentCount}
-        </Card.Text>
-        <Button as={Link} to={`/app/post/${_id}`} variant="primary">
-          Details
-        </Button>
-      </Card.Body>
-    </Card>
+          {strCategory && <Card.Text>Category: {strCategory}</Card.Text>}
+          {strArea && <Card.Text>Area: {strArea}</Card.Text>}
+
+          <Card.Text>
+            <strong>Likes:</strong> {likeCount} | <strong>Comments:</strong>{" "}
+            {commentCount}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 
