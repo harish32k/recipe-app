@@ -1,4 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import * as userClient from "../Clients/userClient.js";
 import { useEffect } from "react";
 import React, { useState } from "react";
@@ -47,6 +48,9 @@ function Profile() {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  const location = useLocation();
+  const { pathname } = location;
+
   return (
     <div>
       <h1>Profile</h1>
@@ -57,55 +61,55 @@ function Profile() {
         <p className="display-6 fw-lighter">{capitalizeFirstLetter(user.role.toLowerCase())}</p>
       </div>
 
-
-      {user.role === "CHEF" ? 
+      {user.role === "CHEF" && userId !== currUser._id ?
         <button className="btn btn-outline-primary">Follow</button> : <></>}
 
       {/* <p>Profile for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
 
-      <Nav variant="tabs" defaultActiveKey="/">
+      <Nav variant="tabs" defaultActiveKey= {user._id !== userId ? "/likes" : "/"}>
+        {user._id !== userId ?
+          <Nav.Item>
+            <Nav.Link as={Link} to={generatePath("")} isActive={pathname === `/` ? true : false}>
+              {" "}
+              {/* Use relative path for Personal */}
+              Information
+            </Nav.Link>
+          </Nav.Item> : <></>}
         <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("")}>
-            {" "}
-            {/* Use relative path for Personal */}
-            Information
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("likes")}>
+          <Nav.Link as={Link} to={generatePath("likes")} isActive={pathname === `/likes` ? true : false}>
             {" "}
             {/* Use relative path for History */}
             Likes
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("comments")}>
+          <Nav.Link as={Link} to={generatePath("comments")} isActive={pathname === `/comments` ? true : false}>
             {" "}
             {/* Use relative path for History */}
             Comments
           </Nav.Link>
         </Nav.Item>
         {user.role === "CHEF" ? <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("recipes")}>
+          <Nav.Link as={Link} to={generatePath("recipes")} isActive={pathname === `/recipes` ? true : false}>
             {" "}
             Recipes
           </Nav.Link>
         </Nav.Item> : <></>}
         <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("following")}>
+          <Nav.Link as={Link} to={generatePath("following")} isActive={pathname === `/following` ? true : false}>
             {" "}
             Following
           </Nav.Link>
         </Nav.Item>
         {user.role === "CHEF" ? <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("followers")}>
+          <Nav.Link as={Link} to={generatePath("followers")} isActive={pathname === `/followers` ? true : false}>
             {" "}
             Followers
           </Nav.Link>
         </Nav.Item> : <></>}
         <Nav.Item>
-          <Nav.Link as={Link} to={generatePath("user-favourites")}>
+          <Nav.Link as={Link} to={generatePath("user-favourites")} isActive={pathname === `/user` ? true : false}>
             {" "}
             Favourites
           </Nav.Link>
@@ -116,92 +120,5 @@ function Profile() {
     </div>
   );
 }
-
-// export default Profile;
-
-// const Profile = () => {
-//   const [key, setKey] = useState("personal");
-
-//   const personalInformation = {
-//     username: "ada",
-//     password: "ada123",
-//     firstName: "Ada",
-//     lastName: "Lovelace",
-//     email: "ada@lovelace.com",
-//     dob: "1815-12-10T00:00:00.000Z",
-//     role: "CHEF",
-//     favouriteCategories: ["beef", "goat", "vegetarian"],
-//     following: ["user3", "user4"],
-//     followers: ["user1", "user2"],
-//   };
-
-//   const handleFollow = () => {
-//     // Implement follow logic
-//   };
-
-//   const handleUnfollow = () => {
-//     // Implement unfollow logic
-//   };
-
-//   const handleEditProfile = () => {
-//     // Implement edit profile logic
-//   };
-
-//   return (
-//     <div>
-//       <div className="d-flex justify-content-end">
-//         <Button onClick={handleFollow} variant="success" className="me-2">
-//           Follow
-//         </Button>
-//         <Button onClick={handleUnfollow} variant="danger" className="me-2">
-//           Unfollow
-//         </Button>
-//         <Button onClick={handleEditProfile} variant="primary">
-//           Edit Profile
-//         </Button>
-//       </div>
-
-//       <Tabs id="profile-tabs" activeKey={key} onSelect={(k) => setKey(k)}>
-//         <Tab eventKey="personal" title="Personal Information">
-//           <Card style={{ width: "18rem", margin: "20px" }}>
-//             <Card.Body>
-//               <Card.Title>{personalInformation.username}</Card.Title>
-//               <Card.Subtitle className="mb-2 text-muted">
-//                 {personalInformation.firstName} {personalInformation.lastName}
-//               </Card.Subtitle>
-//               <Card.Text>Email: {personalInformation.email}</Card.Text>
-//               <Card.Text>DOB: {personalInformation.dob}</Card.Text>
-//               <Card.Text>Role: {personalInformation.role}</Card.Text>
-//               <Card.Text>
-//                 Favourite Categories:{" "}
-//                 {personalInformation.favouriteCategories.join(", ")}
-//               </Card.Text>
-//               <Card.Text>
-//                 Following: {personalInformation.following.length}
-//               </Card.Text>
-//               <Card.Text>
-//                 Followers: {personalInformation.followers.length}
-//               </Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </Tab>
-//         <Tab eventKey="recipeHistory" title="Recipe History">
-//           {/* Recipe History content goes here */}
-//           <Tabs id="recipe-history-tabs" className="flex-column">
-//             <Tab eventKey="likedPosts" title="Liked Posts">
-//               {/* Liked Posts content goes here */}
-//             </Tab>
-//             <Tab eventKey="commentedPosts" title="Commented Posts">
-//               {/* Commented Posts content goes here */}
-//             </Tab>
-//             <Tab eventKey="subscriptionFeed" title="Subscription Feed">
-//               {/* Subscription Feed content goes here */}
-//             </Tab>
-//           </Tabs>
-//         </Tab>
-//       </Tabs>
-//     </div>
-//   );
-// };
 
 export default Profile;
