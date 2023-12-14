@@ -32,7 +32,7 @@ function PostDetails() {
 
   const opts = {
     width: "100%",
-    height: "300",
+    height: "auto",
     // maxHeight: "250px",
     // width: "auto",
   };
@@ -187,8 +187,9 @@ function PostDetails() {
 
       <Row className="justify-content-center align-items-center">
         <Card
-          style={{ width: "85%" }}
-          className="border border-1 border-warning rounded p-5 pt-4"
+          style={{ width: "100%" }}
+          // style={{ width: "85%" }}
+          // className="border border-1 border-warning rounded p-5 pt-4"
         >
           <Card.Img
             variant="top"
