@@ -28,25 +28,26 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
   return (
     <div>
       <h3>Comments</h3>
-      <Form className="mb-2">
-        <Form.Group className="mb-1">
-          <Form.Control
-            as="textarea"
-            rows={1}
-            cols={5}
-            value={newComment}
-            onChange={handleCommentChange}
-            placeholder="Add a comment"
-          />
-        </Form.Group>
-        <Button variant="primary" onClick={handleAddComment}>
-          Add Comment
-        </Button>
+      <Form className="mb-2 container-fluid">
+        <div className="row">
+          <Form.Group className="mb-1 col-md-11">
+            <Form.Control
+              as="textarea"
+              rows={1}
+              value={newComment}
+              onChange={handleCommentChange}
+              placeholder="Add a comment"
+            />
+          </Form.Group>
+          <Button variant="outline-info" onClick={handleAddComment} className="col-md-1">
+            Add
+          </Button>
+        </div>
       </Form>
       {comments.map((comment) => (
         <Card
           key={comment._id}
-          style={{ width: "30rem", marginBottom: "10px" }}
+          style={{ width: "100%", marginBottom: "10px" }}
         >
           <Card.Body>
             <Card.Title>
@@ -55,18 +56,20 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment }) => {
                 className="text-primary"
                 onClick={() => navigate(`/app/profile/${comment.userId._id}`)}
               >
-                <strong>{comment.userId.username}</strong>
+                <span>{comment.userId.firstName + " " + comment.userId.lastName}</span>
+                {user._id === comment.userId._id && (
+                  <Button
+                    variant="outline-danger"
+                    onClick={() => handleDeleteComment(comment._id)}
+                    className="float-end"
+                  >
+                    Delete
+                  </Button>
+                )}
               </span>
             </Card.Title>
             <Card.Text>{comment.strComment}</Card.Text>
-            {user._id === comment.userId._id && (
-              <Button
-                variant="danger"
-                onClick={() => handleDeleteComment(comment._id)}
-              >
-                Delete
-              </Button>
-            )}
+
             {/* <small>{comment.commentedTime}</small> */}
           </Card.Body>
         </Card>

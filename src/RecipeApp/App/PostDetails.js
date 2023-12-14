@@ -177,7 +177,7 @@ function PostDetails() {
       {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(likes, null, 2)}</pre> */}
       {/* <p>Post details for post: {post.strMeal}</p> */}
-      <pre>{JSON.stringify(post, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
 
       <Card style={{ width: "100%" }}>
         <Card.Img
