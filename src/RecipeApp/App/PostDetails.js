@@ -58,30 +58,24 @@ function PostDetails() {
     try {
       const response = await likeClient.fetchLikesOfPost(postId);
       setLikes(response);
-      fetchLikeStatus();
+      console.log("LIKES: ", response)
+      await fetchLikeStatus(postId, user);
     } catch (err) {
       // setError(err);
       console.log("error ", err);
     }
   };
 
-  const fetchLikeStatus = () => {
-    if (likes.length > 0) {
-      const like = likes.find((like) => like.userId._id === user._id);
-      if (like) {
-        setLikeStatus(true);
-      } else {
-        setLikeStatus(false);
-      }
+
+  const fetchLikeStatus = async () => {
+    const like = await likeClient.fetchLikeStatus(postId, user._id) //likes.find((like) => like.userId._id === user._id);
+    //console.log("STATUS", like)
+    if (like.liked) {
+      await setLikeStatus(true);
+    } else {
+      await setLikeStatus(false);
     }
     console.log("like status ", likeStatus);
-    // try {
-    //   const response = await likeClient.fetchLikeStatus(postId, user._id);
-    //   setLikeStatus(response);
-    //   console.log(response);
-    // } catch (err) {
-    //   console.log("error ", err);
-    // }
   };
 
   const fetchComments = async () => {
@@ -111,7 +105,7 @@ function PostDetails() {
         // console.log("user id ", userId);
         const response = await likeClient.addLike(postId, user._id);
         console.log(response);
-        fetchLikes();
+        await fetchLikes();
       } catch (err) {
         console.log("error ", err);
       }
@@ -122,7 +116,7 @@ function PostDetails() {
     try {
       const response = await likeClient.removeLike(postId, user._id);
       console.log(response);
-      fetchLikes();
+      await fetchLikes();
     } catch (err) {
       console.log("error ", err);
     }
@@ -175,7 +169,7 @@ function PostDetails() {
     fetchLikes();
     fetchComments();
     console.log("like status ", likeStatus);
-  }, [likeStatus]);
+  }, [likeStatus, user]);
 
   return (
     <div>
