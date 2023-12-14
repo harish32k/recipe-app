@@ -31,21 +31,35 @@ const MealPostApprove = ({ post, approvePost, deletePost }) => {
           className="mt-3"
         />
         <Card.Body>
-          <Link to={`/app/post/${_id}`}>
-            <Card.Title>{strMeal}</Card.Title>
-          </Link>
+          <Card.Title
+            as={Link}
+            to={`/app/post/${_id}`}
+            style={{
+              color: "#FF8C00",
+              textDecoration: "none",
+            }}
+          >
+            {strMeal}
+          </Card.Title>
           {userId && userId._id === "mealDB" ? (
-            <Card.Subtitle className="mb-2 text-muted">By MealDB</Card.Subtitle>
+            <Card.Subtitle
+              className="mb-2 mt-2 text-muted"
+              style={{ fontSize: "small" }}
+            >
+              By MealDB
+            </Card.Subtitle>
           ) : (
-            <Link to={`/app/profile/${userId._id}`}>
-              <Card.Subtitle className="mb-2 text-muted">
-                By {userId.firstName + " " + userId.lastName}
-              </Card.Subtitle>
-            </Link>
+            <Card.Subtitle
+              as={Link}
+              to={`/app/profile/${userId._id}`}
+              className="mb-2 text-muted"
+            >
+              By {userId.firstName + " " + userId.lastName}
+            </Card.Subtitle>
           )}
           {strCategory && <Card.Text>Category: {strCategory}</Card.Text>}
           {strArea && <Card.Text>Area: {strArea}</Card.Text>}
-          <Card.Text>
+          <Card.Text style={{ fontSize: "small" }}>
             <strong>Likes:</strong> {likeCount} | <strong>Comments:</strong>{" "}
             {commentCount}
           </Card.Text>

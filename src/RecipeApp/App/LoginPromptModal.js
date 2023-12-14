@@ -12,10 +12,10 @@ const LoginPromptModal = ({ show, handleClose }) => {
         <p>You need to log in to like or comment on a post.</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="danger" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" as={Link} to={"/app/signin"}>
+        <Button variant="success" as={Link} to={"/app/signin"}>
           Log In
         </Button>
       </Modal.Footer>
