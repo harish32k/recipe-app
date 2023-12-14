@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import * as userClient from "../Clients/userClient.js";
+import * as followClient from "../Clients/followClient.js";
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -48,8 +49,65 @@ function Profile() {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+
+  const fetchFollowerCount = async () => {
+    try {
+      const response = await followClient.getFollowerCount(user._id);
+      setFollowCount(response.count);
+      console.log("count", response);
+    } catch (err) {
+      // setError(err);
+      console.log("error ", err);
+    }
+  };
+
+  const fetchFollowStatus = async () => {
+    try {
+      const response = await followClient.followingStatus(currUser._id, user._id);
+      console.log("STATUS", response.following)
+      setFollowStatus(response.following);
+      
+      console.log("count", response);
+    } catch (err) {
+      // setError(err);
+      console.log("error ", err);
+    }
+  };
+
   const location = useLocation();
   const { pathname } = location;
+
+  const [followCount, setFollowCount] = useState(0);
+  const [followStatus, setFollowStatus] = useState(false);
+  useEffect(() => {
+    // if (!(currUser.role === "GUEST" && userId === currUser._id)) {
+    //   fetchUserDetails();
+    // }
+    fetchFollowerCount();
+    fetchFollowStatus();
+  }, [user]);
+  
+  
+  const handleFollow = async () => {
+    try {
+      const response = await followClient.addFollow(currUser._id, user._id);
+      await fetchFollowerCount();
+      await fetchFollowStatus();
+    } catch (err) {
+      console.log("error ", err);
+    }
+  };
+
+  const handleUnfollow = async () => {
+    try {
+      const response = await followClient.removeFollow(currUser._id, user._id);
+      await fetchFollowerCount();
+      await fetchFollowStatus();
+    } catch (err) {
+      console.log("error ", err);
+    }
+  };
+
 
   return (
     <div>
@@ -62,7 +120,9 @@ function Profile() {
       </div>
 
       {user.role === "CHEF" && userId !== currUser._id && currUser.role !== "GUEST" ?
-        <button className="btn btn-outline-primary">Follow</button> : <></>}
+        (!followStatus ? <button className="btn btn-outline-primary" onClick={() => handleFollow()}>Follow</button> : <button className="btn btn-primary" onClick={() => handleUnfollow()}>Unfollow</button>) : <></>}
+      {user.role === "CHEF" ?
+        <span> Followers: {followCount}</span> : <></>}
 
       {/* <p>Profile for user: {user.username}</p> */}
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}

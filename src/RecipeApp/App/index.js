@@ -23,6 +23,7 @@ import FavouritesComponent from "./Components/FavouritesComponent.js";
 import HistoryRecipesComponent from "./Components/HistoryRecipesComponent.js"
 import HistoryLikesComponent from "./Components/HistoryLikesComponent.js";
 import HistoryCommentsComponent from "./Components/HistoryCommentsComponent.js";
+import EditProfileComponent from "./Components/EditProfileComponent.js";
 
 function RecipeApp() {
   return (
@@ -43,6 +44,7 @@ function RecipeApp() {
             <Route path="recipes" element={<HistoryRecipesComponent />} />
             <Route path="followers" element={<FollowersComponent />} />
             <Route path="following" element={<FollowingComponent />} />
+            <Route path="edit-profile" element={<EditProfileComponent />} />
             <Route path=":user-favourites" element={<FavouritesComponent />} />
             <Route path=":userId" element={<PersonalComponent />} />
             <Route path=":userId/history" element={<HistoryComponent />} />
@@ -52,6 +54,7 @@ function RecipeApp() {
             <Route path=":userId/followers" element={<FollowersComponent />} />
             <Route path=":userId/following" element={<FollowingComponent />} />
             <Route path=":userId/user-favourites" element={<FavouritesComponent />} />
+            <Route path=":userId/edit-profile" element={<EditProfileComponent />} />
           </Route>
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/profile/:userId" element={<Profile />} />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const UserProfile = ({ user }) => {
   const formattedDOB = new Date(user.dob).toLocaleDateString();
@@ -8,12 +9,14 @@ const UserProfile = ({ user }) => {
   return (
     <Container>
       <Row className="mt-4">
-        <Col md={4}>
+        <Col md={11}>
           <Card>
             <Card.Body>
-              <Button variant="warning" className="float-end">
-                Edit Profile
-              </Button>
+              <Link to="edit-profile">
+                <Button variant="warning" className="float-end">
+                  Edit Profile
+                </Button>
+              </Link>
               <Card.Title>{`${user.firstName} ${user.lastName}`}</Card.Title>
               <Card.Text>
                 <strong>Username:</strong> {user.username}
