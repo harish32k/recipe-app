@@ -3,6 +3,7 @@ import { Form, Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as recipeClient from "../Clients/recipeClient.js";
 import * as userClient from "../Clients/userClient.js";
+import * as favClient from "../Clients/favouritesClient.js";
 import "../../App.css";
 
 const Signup = () => {
@@ -44,6 +45,7 @@ const Signup = () => {
         favoriteCategories: selectedCategories,
       }));
 
+
       if (selectedCategories.length > 0) {
         setError("");
       }
@@ -65,7 +67,9 @@ const Signup = () => {
       return;
     }
     try {
+      console.log("signing up here")
       const response = await userClient.signup(formData);
+      console.log("obtained response", response, response.status)
       if (response.status === 201) {
         resetForm();
         navigate("/app/signin");
@@ -73,8 +77,8 @@ const Signup = () => {
     } catch (err) {
       console.log("error ", err);
       setError("Error signing up");
-    }
-    console.log("Form data submitted:", formData);
+    } 
+    // console.log("Form data submitted:", formData);
   };
 
   useEffect(() => {
