@@ -6,6 +6,11 @@
   background-image: linear-gradient(to right, #823604, #f96400);
 }
 
+.orange-theme {
+  background-color: #ff8c00; /* Orange background color */
+  color: #fff; /* White text color */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

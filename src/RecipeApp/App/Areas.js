@@ -1,6 +1,6 @@
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Areas() {
@@ -20,14 +20,18 @@ function Areas() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <h1>Areas</h1>
       {/* <pre>{JSON.stringify(areas, null, 2)}</pre> */}
       {areas.map((area, index) => (
         <div key={index}>
           <h3>
-            {area.strArea + " "}
-            <Button as={Link} to={`/app/area/${area.strArea}`}>
+            <span style={{ marginRight: "1rem" }}>{area.strArea}</span>
+            <Button
+              as={Link}
+              to={`/app/area/${area.strArea}`}
+              variant="outline-primary"
+            >
               View Recipes
             </Button>
           </h3>
@@ -35,7 +39,7 @@ function Areas() {
           {/* <p>{area.strAreaDescription}</p> */}
         </div>
       ))}
-    </div>
+    </Container>
   );
 }
 

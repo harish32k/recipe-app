@@ -1,6 +1,6 @@
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Categories() {
@@ -20,22 +20,29 @@ function Categories() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <h1>Categories</h1>
-      {/* <pre>{JSON.stringify(categories, null, 2)}</pre> */}
       {categories.map((category, index) => (
         <div key={index}>
           <h3>
-            {category.strCategory + " "}
-            <Button as={Link} to={`/app/category/${category.strCategory}`}>
+            <span style={{ marginRight: "1rem" }}>{category.strCategory}</span>
+            <Button
+              as={Link}
+              to={`/app/category/${category.strCategory}`}
+              variant="outline-primary"
+            >
               View Recipes
             </Button>
           </h3>
-          <img src={category.strCategoryThumb} alt={category.strCategory} />
+          <img
+            src={category.strCategoryThumb}
+            alt={category.strCategory}
+            style={{ width: "100%", maxWidth: "300px" }}
+          ></img>
           <p>{category.strCategoryDescription}</p>
         </div>
       ))}
-    </div>
+    </Container>
   );
 }
 

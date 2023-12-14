@@ -3,8 +3,12 @@ import { Form, Button, Container } from "react-bootstrap";
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.userReducer.user);
   const [formData, setFormData] = useState({
     strMeal: "",
@@ -21,6 +25,31 @@ const CreatePost = () => {
 
   const [catergories, setCatergories] = useState([]);
   const [areas, setAreas] = useState([]);
+
+  const fetchPost = async () => {
+    try {
+      const response = await recipeClient.fetchPostById(id);
+      console.log(response);
+      setFormData({
+        strMeal: response.strMeal,
+        strCategory: response.strCategory,
+        strArea: response.strArea,
+        strInstructions: response.strInstructions,
+        strMealThumb: response.strMealThumb,
+        strYoutube: response.strYoutube,
+        ingredients: response.ingredients,
+        measures: response.measures,
+        newIngredient: "",
+        newMeasure: "",
+      });
+      if (response.userId._id !== user._id) {
+        alert("You are not authorized to edit this post");
+        navigate("/app");
+      }
+    } catch (err) {
+      console.log("error ", err);
+    }
+  };
 
   const fetchCategories = async () => {
     try {
@@ -113,7 +142,6 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement your logic to submit the form data to the server
     console.log(formData);
     const {
       strMeal,
@@ -125,43 +153,38 @@ const CreatePost = () => {
       ingredients,
       measures,
     } = formData;
-    if (user.role === "CHEF") {
-      if (
-        !(
-          formData.strMeal &&
-          formData.strCategory &&
-          formData.strArea &&
-          formData.strInstructions &&
-          formData.ingredients.length > 0 &&
-          formData.measures.length > 0
-        )
-      ) {
-        alert("Please fill in all the fields");
+
+    try {
+      const body = {
+        strMeal,
+        strCategory,
+        strArea,
+        strInstructions,
+        strMealThumb,
+        strYoutube,
+        ingredients,
+        measures,
+        userId: user._id,
+      };
+      if (id) {
+        const response = await recipeClient.updatePost(body, id);
+        console.log(response);
       } else {
-        try {
-          const response = await recipeClient.createPost({
-            strMeal,
-            strCategory,
-            strArea,
-            strInstructions,
-            strMealThumb,
-            strYoutube,
-            ingredients,
-            measures,
-            userId: user._id,
-          });
-          console.log(response);
-          resetForm();
-        } catch (err) {
-          console.log("error ", err);
-        }
+        const response = await recipeClient.createPost(body);
+        console.log(response);
       }
+      resetForm();
+    } catch (err) {
+      console.log("error ", err);
     }
   };
 
   useEffect(() => {
     fetchCategories();
     fetchAreas();
+    if (id) {
+      fetchPost();
+    }
   }, []);
 
   return (
@@ -178,6 +201,7 @@ const CreatePost = () => {
             name="strMeal"
             value={formData.strMeal}
             onChange={handleInputChange}
+            required
           />
         </Form.Group>
 
@@ -188,6 +212,7 @@ const CreatePost = () => {
             name="strCategory"
             value={formData.strCategory}
             onChange={handleInputChange}
+            required
           >
             <option value="">Select a category</option>
             {catergories.length > 0 &&
@@ -206,6 +231,7 @@ const CreatePost = () => {
             name="strArea"
             value={formData.strArea}
             onChange={handleInputChange}
+            required
           >
             <option value="">Select an area</option>
             {areas.length > 0 &&
@@ -226,6 +252,7 @@ const CreatePost = () => {
             name="strInstructions"
             value={formData.strInstructions}
             onChange={handleInputChange}
+            required
           />
         </Form.Group>
 

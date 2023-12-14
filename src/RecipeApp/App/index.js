@@ -20,12 +20,46 @@ import SubscriptionFeed from "./SubscriptionFeed.js";
 import FollowersComponent from "./Components/FollowersComponent.js";
 import FollowingComponent from "./Components/FollowingComponent.js";
 import FavouritesComponent from "./Components/FavouritesComponent.js";
-import HistoryRecipesComponent from "./Components/HistoryRecipesComponent.js"
+import HistoryRecipesComponent from "./Components/HistoryRecipesComponent.js";
 import HistoryLikesComponent from "./Components/HistoryLikesComponent.js";
 import HistoryCommentsComponent from "./Components/HistoryCommentsComponent.js";
 import EditProfileComponent from "./Components/EditProfileComponent.js";
+import "../../App.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import CustomAlert from "./Components/CustomAlert.js";
+import { useState } from "react";
 
 function RecipeApp() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.userReducer.user);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const checkValidPathPermission = () => {
+    if (
+      ((pathname.includes("/app/profile") ||
+        pathname.includes("/app/subscription")) &&
+        user.role === "GUEST") ||
+      (pathname.includes("/app/createPost") && user.role !== "CHEF") ||
+      (pathname.includes("/app/approvePost") && user.role !== "ADMIN")
+    ) {
+      setAlertMessage("You are not authorized to view this page");
+      setShowAlert(true);
+      navigate("/app");
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  useEffect(() => {
+    checkValidPathPermission();
+  }, [pathname]);
+
   return (
     <>
       <NavigationBar />
@@ -49,8 +83,14 @@ function RecipeApp() {
             <Route path=":userId" element={<PersonalComponent />} />
             <Route path=":userId/history" element={<HistoryComponent />} />
             <Route path=":userId/likes" element={<HistoryLikesComponent />} />
-            <Route path=":userId/comments" element={<HistoryCommentsComponent />} />
-            <Route path=":userId/recipes" element={<HistoryRecipesComponent />} />
+            <Route
+              path=":userId/comments"
+              element={<HistoryCommentsComponent />}
+            />
+            <Route
+              path=":userId/recipes"
+              element={<HistoryRecipesComponent />}
+            />
             <Route path=":userId/followers" element={<FollowersComponent />} />
             <Route path=":userId/following" element={<FollowingComponent />} />
             <Route path=":userId/user-favourites" element={<FavouritesComponent />} />
@@ -67,9 +107,17 @@ function RecipeApp() {
           <Route path="/user" element={<UserProfile />} />
           <Route path="/user/:userId" element={<UserProfile />} />
           <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/createPost/:id" element={<CreatePost />} />
           <Route path="/approvePost" element={<ApprovePost />} />
         </Routes>
       </div>
+      {showAlert && (
+        <CustomAlert
+          show={showAlert}
+          message={alertMessage}
+          onClose={handleCloseAlert}
+        />
+      )}
     </>
   );
 }

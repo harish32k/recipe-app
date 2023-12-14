@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../userReducers.js";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import "../../App.css";
 
 function Signin() {
   const [error, setError] = useState({});
@@ -37,7 +39,46 @@ function Signin() {
 
   return (
     <div>
-      <h1>Sign in</h1>
+      <Container>
+        <Row className="justify-content-center align-items-center min-vh-100">
+          <Col xs={12} md={6} lg={4}>
+            <h2 className="text-center mb-4">Recipe Social Network</h2>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, username: e.target.value })
+                  }
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, password: e.target.value })
+                  }
+                />
+              </Form.Group>
+
+              <Button
+                type="submit"
+                className="w-100 mt-3"
+                variant="outline-warning"
+                onClick={signin}
+              >
+                Sign In
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+      {/* <h1>Sign in</h1>
       <input
         type="text"
         placeholder="username"
@@ -58,7 +99,7 @@ function Signin() {
       <div className="container">
         <pre>{JSON.stringify(credentials, null, 2)}</pre>
       </div>
-      <pre> {JSON.stringify(error, null, 2)}</pre>
+      <pre> {JSON.stringify(error, null, 2)}</pre> */}
     </div>
   );
 }
