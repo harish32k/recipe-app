@@ -27,8 +27,11 @@ function CategoryPosts() {
   const [favouritedStatus, setFavouritedStatus] = useState(false);
   const fetchFavouriteStatus = async () => {
     try {
-      const response = await favClient.fetchFavouritedStatus(currUser._id, category);
-      console.log("STATUS", response.favourited)
+      const response = await favClient.fetchFavouritedStatus(
+        currUser._id,
+        category
+      );
+      console.log("STATUS", response.favourited);
       setFavouritedStatus(response.favourited);
     } catch (err) {
       console.log("error ", err);
@@ -38,10 +41,12 @@ function CategoryPosts() {
     fetchFavouriteStatus();
   }, [category]);
 
-  
   const handleFavourite = async () => {
     try {
-      const response = await favClient.addFavouriteCategory(currUser._id, category);
+      const response = await favClient.addFavouriteCategory(
+        currUser._id,
+        category
+      );
       await fetchFavouriteStatus();
     } catch (err) {
       console.log("error ", err);
@@ -50,7 +55,10 @@ function CategoryPosts() {
 
   const handleUnfavourite = async () => {
     try {
-      const response = await favClient.removeFavouriteCategory(currUser._id, category);
+      const response = await favClient.removeFavouriteCategory(
+        currUser._id,
+        category
+      );
       await fetchFavouriteStatus();
     } catch (err) {
       console.log("error ", err);
@@ -60,9 +68,18 @@ function CategoryPosts() {
   return (
     <Container>
       <h1>{category}</h1>
-      {favouritedStatus ?
-        <button className="btn btn-success" onClick={() => handleUnfavourite()}>Favourited</button> :
-        <button className="btn btn-outline-success"onClick={() => handleFavourite()}>Favourite</button>}
+      {favouritedStatus ? (
+        <button className="btn btn-success" onClick={() => handleUnfavourite()}>
+          Favourited
+        </button>
+      ) : (
+        <button
+          className="btn btn-outline-success"
+          onClick={() => handleFavourite()}
+        >
+          Favourite
+        </button>
+      )}
       <Row>
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />

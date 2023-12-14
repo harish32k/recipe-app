@@ -26,6 +26,7 @@ const CreatePost = () => {
 
   const [catergories, setCatergories] = useState([]);
   const [areas, setAreas] = useState([]);
+  const [message, setMessage] = useState("");
 
   const fetchPost = async () => {
     try {
@@ -65,8 +66,7 @@ const CreatePost = () => {
   const fetchAreas = async () => {
     try {
       const response = await recipeClient.fetchAreas();
-      setAreas(response.meals.map((area) => area.strArea));
-      console.log(response.meals.map((area) => area.strArea));
+      setAreas(response.map((area) => area.strArea));
       console.log(response);
     } catch (err) {
       // setError(err);
@@ -92,6 +92,7 @@ const CreatePost = () => {
   };
 
   const handleFileChange = (event) => {
+    setMessage("");
     const file = event.target.files[0];
 
     if (file) {
@@ -111,6 +112,7 @@ const CreatePost = () => {
   };
 
   const handleInputChange = (e) => {
+    setMessage("");
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -119,6 +121,7 @@ const CreatePost = () => {
   };
 
   const handleAddIngredientAndMeasure = () => {
+    setMessage("");
     if (formData.newIngredient && formData.newMeasure) {
       setFormData((prevData) => ({
         ...prevData,
@@ -167,9 +170,11 @@ const CreatePost = () => {
       if (id) {
         const response = await recipeClient.updatePost(body, id);
         console.log(response);
+        setMessage("Post updated successfully");
       } else {
         const response = await recipeClient.createPost(body);
         console.log(response);
+        setMessage("Post created successfully");
       }
       resetForm();
     } catch (err) {
@@ -191,6 +196,7 @@ const CreatePost = () => {
       <pre>{JSON.stringify(areas, null, 2)}</pre> */}
       <h1 className="m-4">Create Post</h1>
       <Row className="justify-content-center align-items-center">
+        {message && <div className="alert alert-success">{message}</div>}
         <Form
           onSubmit={handleSubmit}
           style={{

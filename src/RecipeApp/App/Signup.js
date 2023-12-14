@@ -72,6 +72,7 @@ const Signup = () => {
       }
     } catch (err) {
       console.log("error ", err);
+      setError("Error signing up");
     }
     console.log("Form data submitted:", formData);
   };
@@ -97,6 +98,7 @@ const Signup = () => {
     <Container className="my-4" fluid="xl">
       <h1 className="m-4">Signup Page</h1>
       <Row className="justify-content-center align-items-center">
+        {error && <div className="alert alert-danger">{error}</div>}
         <Form
           onSubmit={handleSubmit}
           style={{
@@ -197,7 +199,6 @@ const Signup = () => {
 
           <Form.Group className="mb-3" controlId="favoriteCategories">
             <Form.Label>Favorite Categories</Form.Label>
-            {error && <div style={{ color: "red" }}>{error}</div>}
             <Col>
               <Row>
                 {categories.map((category) => (

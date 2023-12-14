@@ -22,8 +22,8 @@ const SimpleMealPost = ({ post }) => {
       : strMealThumb;
 
   return (
-    <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
-      <Card style={{ width: "18rem", margin: "10px" }}>
+    <Col xs={12} sm={6} md={4} lg={4} xl={3} className="mb-4">
+      <Card style={{ width: "18rem", maxWidth: "95%" }}>
         <Card.Img
           variant="top"
           src={mealThumb}

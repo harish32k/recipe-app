@@ -30,10 +30,10 @@ const UserProfile = ({ user }) => {
               <Card.Text>
                 <strong>Role:</strong> {user.role}
               </Card.Text>
-              <Card.Text>
+              {/* <Card.Text>
                 <strong>Favorite Categories:</strong>{" "}
                 {favoriteCategories.join(", ")}
-              </Card.Text>
+              </Card.Text> */}
             </Card.Body>
           </Card>
         </Col>

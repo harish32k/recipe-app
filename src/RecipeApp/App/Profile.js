@@ -42,6 +42,9 @@ function Profile() {
   };
 
   useEffect(() => {
+    if (!loggedUserChecking && currUser.role === "GUEST") {
+      navigate("/app/");
+    }
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
       fetchUserDetails();
     }

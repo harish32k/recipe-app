@@ -40,9 +40,7 @@ function RecipeApp() {
 
   const checkValidPathPermission = () => {
     if (
-      ((pathname.includes("/app/profile") ||
-        pathname.includes("/app/subscription")) &&
-        user.role === "GUEST") ||
+      (pathname.includes("/app/subscription") && user.role === "GUEST") ||
       (pathname.includes("/app/createPost") && user.role !== "CHEF") ||
       (pathname.includes("/app/approvePost") && user.role !== "ADMIN")
     ) {
@@ -93,8 +91,14 @@ function RecipeApp() {
             />
             <Route path=":userId/followers" element={<FollowersComponent />} />
             <Route path=":userId/following" element={<FollowingComponent />} />
-            <Route path=":userId/user-favourites" element={<FavouritesComponent />} />
-            <Route path=":userId/edit-profile" element={<EditProfileComponent />} />
+            <Route
+              path=":userId/user-favourites"
+              element={<FavouritesComponent />}
+            />
+            <Route
+              path=":userId/edit-profile"
+              element={<EditProfileComponent />}
+            />
           </Route>
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/profile/:userId" element={<Profile />} />
