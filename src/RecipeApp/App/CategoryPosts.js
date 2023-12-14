@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MealPost from "./MealPost";
 import * as recipeClient from "../Clients/recipeClient.js";
 import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 function CategoryPosts() {
   const { category } = useParams();
@@ -21,13 +22,13 @@ function CategoryPosts() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <h1>{category}</h1>
       {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {posts.map((post, index) => (
         <MealPost key={post._id} post={post} />
       ))}
-    </div>
+    </Container>
   );
 }
 

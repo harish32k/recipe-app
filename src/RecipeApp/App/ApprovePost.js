@@ -2,6 +2,7 @@ import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import MealPost from "./MealPost";
+import { Container } from "react-bootstrap";
 
 function ApprovePost() {
   const user = useSelector((state) => state.userReducer.user);
@@ -43,7 +44,7 @@ function ApprovePost() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <h1>Approve Posts</h1>
       {posts.map((post, index) => (
         <div key={index}>
@@ -62,7 +63,7 @@ function ApprovePost() {
           <MealPost post={post} />
         </div>
       ))}
-    </div>
+    </Container>
   );
 }
 

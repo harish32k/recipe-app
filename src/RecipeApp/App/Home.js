@@ -3,7 +3,6 @@ import * as recipeClient from "../Clients/recipeClient.js";
 import { useEffect, useState } from "react";
 import MealPost from "./MealPost.js";
 import { Container, Row } from "react-bootstrap";
-import * as authClient from "../Clients/authClient.js";
 
 function Home() {
   const user = useSelector((state) => state.userReducer.user);
@@ -26,15 +25,6 @@ function Home() {
     }
   };
 
-  const handleVerifyAccessTokenFromCookie = async () => {
-    try {
-      const response = await authClient.verifyAccessTokenFromCookie();
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     getPosts();
   }, [user]);
@@ -42,7 +32,6 @@ function Home() {
   return (
     <Container>
       <h1>Home</h1>
-      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {posts.length === 0 && <p>No posts to display</p>}
       <Row>
         {posts.map((post, index) => (
