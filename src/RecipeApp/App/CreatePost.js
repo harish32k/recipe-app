@@ -55,9 +55,7 @@ const CreatePost = () => {
   const fetchCategories = async () => {
     try {
       const response = await recipeClient.fetchCategories();
-      setCatergories(
-        response.categories.map((category) => category.strCategory)
-      );
+      setCatergories(response.map((category) => category.strCategory));
       console.log(response.categories.map((category) => category.strCategory));
     } catch (err) {
       // setError(err);

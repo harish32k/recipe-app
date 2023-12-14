@@ -25,9 +25,7 @@ const Signup = () => {
   const fetchCategories = async () => {
     try {
       const response = await recipeClient.fetchCategories();
-      setCategories(
-        response.categories.map((category) => category.strCategory)
-      );
+      setCategories(response.map((category) => category.strCategory));
       console.log(response.categories.map((category) => category.strCategory));
     } catch (err) {
       console.log("error ", err);
