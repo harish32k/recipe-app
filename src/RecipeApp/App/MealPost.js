@@ -49,13 +49,17 @@ const MealPost = ({ post }) => {
               By MealDB
             </Card.Subtitle>
           ) : (
-            <Card.Subtitle
-              as={Link}
-              to={`/app/profile/${userId._id}`}
-              className="mb-2 text-muted"
-            >
-              By {userId.firstName + " " + userId.lastName}
-            </Card.Subtitle>
+            <>
+              <br />
+              <Card.Subtitle
+                as={Link}
+                to={`/app/profile/${userId._id}`}
+                className="mb-2 text-muted"
+                style={{ fontSize: "small", textDecoration: "none" }}
+              >
+                By {userId.firstName + " " + userId.lastName}
+              </Card.Subtitle>
+            </>
           )}
 
           {strCategory && <Card.Text>Category: {strCategory}</Card.Text>}
