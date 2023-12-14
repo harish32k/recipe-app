@@ -3,7 +3,7 @@ import * as postClient from "../Clients/recipeClient.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import MealPost from "./MealPost.js";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 function Search() {
   const { search } = useLocation();
@@ -29,10 +29,11 @@ function Search() {
     <Container>
       <h1>Search</h1>
       <p>Search results for: {recipeName}</p>
-      {posts.map((post, index) => (
-        <MealPost key={post._id} post={post} />
-      ))}
-      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
+      <Row>
+        {posts.map((post) => (
+          <MealPost key={post._id} post={post} />
+        ))}
+      </Row>
     </Container>
   );
 }

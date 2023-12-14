@@ -5,9 +5,9 @@ import * as userClient from "../../Clients/userClient.js";
 import * as commentClient from "../../Clients/commentClient.js";
 import SimpleMealPost from "../SimpleMealPost.js";
 import SimpleMealPostComment from "../SimpleMealPostComment.js";
+import { Container, Row } from "react-bootstrap";
 
 function HistoryCommentsComponent() {
-
   let { userId } = useParams();
   const currUser = useSelector((state) => state.userReducer.user);
   let loggedUserChecking = false;
@@ -34,7 +34,6 @@ function HistoryCommentsComponent() {
     }
   }, [userId]);
 
-
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
@@ -45,8 +44,7 @@ function HistoryCommentsComponent() {
       // setError(err);
       console.log("error ", err);
     }
-  }
-
+  };
 
   useEffect(() => {
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
@@ -54,21 +52,27 @@ function HistoryCommentsComponent() {
     }
   }, [userId]);
 
-
   return (
-    <div>
+    <Container>
       {/* {posts.map((post, index) => (
         <SimpleMealPostComment key={post._id} post={post.recipe} comment={post.strComment} />
       ))} */}
-
-      {posts.length === 0 ? <p>There is nothing to see on this page.</p> :
-        <ul className="list-group">
-          {posts.map((post, index) => (
-            <SimpleMealPostComment key={post._id} post={post.recipe} comment={post.strComment} />
-          ))}
-        </ul>
-      }
-    </div>
+      <Row>
+        {posts.length === 0 ? (
+          <p>There is nothing to see on this page.</p>
+        ) : (
+          <ul className="list-group">
+            {posts.map((post, index) => (
+              <SimpleMealPostComment
+                key={post._id}
+                post={post.recipe}
+                comment={post.strComment}
+              />
+            ))}
+          </ul>
+        )}
+      </Row>
+    </Container>
   );
 }
 

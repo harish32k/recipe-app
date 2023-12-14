@@ -5,6 +5,7 @@ import * as userClient from "../../Clients/userClient.js";
 import * as likeClient from "../../Clients/likeClient.js";
 import MealPost from "../MealPost.js";
 import SimpleMealPost from "../SimpleMealPost.js";
+import { Container, Row } from "react-bootstrap";
 
 function HistoryLikesComponent() {
   const BASE_API = process.env.REACT_APP_BASE_API_URL;
@@ -39,7 +40,7 @@ function HistoryLikesComponent() {
       // setError(err);
       console.log("error ", err);
     }
-  }
+  };
 
   useEffect(() => {
     if (!(currUser.role === "GUEST" && userId === currUser._id)) {
@@ -54,16 +55,19 @@ function HistoryLikesComponent() {
   }, [userId]);
 
   return (
-    <div>
-      {posts.length === 0 ? <p>There is nothing to see on this page.</p> :
-        <ul className="list-group">
-          {posts.map((post, index) => (
-            <SimpleMealPost key={post._id} post={post.recipe} />
-          ))}
-        </ul>
-      }
-    </div>
-
+    <Container>
+      <Row>
+        {posts.length === 0 ? (
+          <p>There is nothing to see on this page.</p>
+        ) : (
+          <ul className="list-group">
+            {posts.map((post, index) => (
+              <SimpleMealPost key={post._id} post={post.recipe} />
+            ))}
+          </ul>
+        )}
+      </Row>
+    </Container>
   );
 }
 
