@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const RECIPE_API = `${BASE_API}/api/recipes`;
+export const DOMAIN_API = `${BASE_API}/api/domains`;
 
 export const fetchRecipeByName = async (name) => {
   const response = await axios.get(`${RECIPE_API}/name/${name}`);
@@ -24,7 +25,7 @@ export const fetchPosts = async () => {
 // };
 
 export const fetchCategories = async () => {
-  const response = await axios.get(`${BASE_API}/api/categories`);
+  const response = await axios.get(`${DOMAIN_API}/categories`);
   return response.data;
 };
 
@@ -34,7 +35,7 @@ export const fetchCategoryByName = async (category) => {
 };
 
 export const fetchAreas = async () => {
-  const response = await axios.get(`${BASE_API}/api/areas`);
+  const response = await axios.get(`${DOMAIN_API}/areas`);
   return response.data;
 };
 

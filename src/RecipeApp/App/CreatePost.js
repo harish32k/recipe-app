@@ -197,7 +197,7 @@ const CreatePost = () => {
         <Form
           onSubmit={handleSubmit}
           style={{
-            border: "2px solid #F9A826",
+            border: "1px solid #F9A826",
             borderRadius: "10px",
             width: "80%",
           }}

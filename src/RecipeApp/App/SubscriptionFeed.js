@@ -26,7 +26,8 @@ function SubscriptionFeed() {
     <Container>
       <h1 className="mb-2">Subscription Feed</h1>
       {posts.length === 0 && <p>No posts to display</p>}
-      <Row className="pt-2 min-vh-100 border border-2 border-warning rounded">
+      {/* <Row className="pt-2 min-vh-100 border border-2 border-warning rounded"> */}
+      <Row className="pt-2">
         {posts.map((post) => (
           <MealPost key={post._id} post={post} />
         ))}

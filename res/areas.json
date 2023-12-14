@@ -1,0 +1,218 @@
+[
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab121"
+    },
+    "strArea": "Mexican",
+    "strAreaDescription": "Mexican cuisine is known for its bold flavors, with staples like tacos, enchiladas, and guacamole. The use of chili peppers, corn, and beans is prevalent. Mexican street food, such as tamales and elote, is also widely enjoyed.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/mexico-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab124"
+    },
+    "strArea": "Portuguese",
+    "strAreaDescription": "Portuguese cuisine is characterized by fresh seafood, olive oil, and a variety of spices. Bacalhau (salted cod), pastéis de nata (custard tarts), and caldo verde (green soup) are well-known dishes.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab119"
+    },
+    "strArea": "Greek",
+    "strAreaDescription": "Greek cuisine is characterized by olive oil, fresh vegetables, and a variety of cheeses. Souvlaki (grilled meat skewers), moussaka, and tzatziki are popular. The Mediterranean influence is evident in the use of herbs, olives, and seafood.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/greece-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab110"
+    },
+    "strArea": "American",
+    "strAreaDescription": "A diverse culinary landscape, American cuisine reflects the multicultural fabric of the nation. From Southern barbecue and Tex-Mex to New England clam chowder and fast food culture, the United States boasts a wide range of flavors and styles.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11e"
+    },
+    "strArea": "Japanese",
+    "strAreaDescription": "Japanese cuisine emphasizes seasonal ingredients and meticulous presentation. Sushi, sashimi, ramen, and tempura are well-known internationally. The use of umami-rich ingredients like soy sauce and miso is characteristic.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/japan-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab118"
+    },
+    "strArea": "French",
+    "strAreaDescription": "French cuisine is renowned for its emphasis on fresh, high-quality ingredients. Classic dishes like coq au vin, ratatouille, and bouillabaisse showcase a mastery of culinary techniques. French pastries, cheeses, and wines are also celebrated.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11c"
+    },
+    "strArea": "Italian",
+    "strAreaDescription": "Italian cuisine is characterized by simplicity and the use of fresh, high-quality ingredients. Pasta, pizza, and risotto are staples, and regional specialties like Tuscan ribollita and Sicilian cannoli showcase the diversity of the cuisine.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/italy-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab113"
+    },
+    "strArea": "Chinese",
+    "strAreaDescription": "Chinese cuisine is known for its regional diversity, with flavors ranging from the spicy dishes of Sichuan to the delicate dim sum of Cantonese cuisine. Key elements include rice, noodles, and a variety of fresh vegetables, often stir-fried or steamed.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/china-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab114"
+    },
+    "strArea": "Croatian",
+    "strAreaDescription": "Croatian cuisine is influenced by Mediterranean, Italian, and Balkan flavors. Grilled meats, seafood, olive oil, and aromatic herbs are common ingredients. Pastries and desserts, such as strudels and fritule, also play a significant role.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/croatia-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab111"
+    },
+    "strArea": "British",
+    "strAreaDescription": "British cuisine combines traditional dishes like fish and chips, bangers and mash, and roast dinners with a growing diversity of international influences. The emphasis on hearty meals and a love for teas are characteristic of British food culture.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab129"
+    },
+    "strArea": "Turkish",
+    "strAreaDescription": "Turkish cuisine is a fusion of Middle Eastern, Central Asian, and Mediterranean influences. Kebabs, mezze, and baklava are well-known. The use of spices, herbs, and fresh vegetables is prominent, and dishes often feature yogurt or olive oil.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/turkey-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11f"
+    },
+    "strArea": "Kenyan",
+    "strAreaDescription": "Kenyan cuisine reflects the country's diverse ethnic groups. Nyama choma (grilled meat), ugali (maize porridge), and sukuma wiki (collard greens) are common. Tea is a popular beverage, and tropical fruits are widely enjoyed.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/kenya-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab123"
+    },
+    "strArea": "Polish",
+    "strAreaDescription": "Polish cuisine features hearty and comforting dishes. Pierogi (dumplings), kielbasa (sausage), and bigos (hunter's stew) are popular. The use of potatoes, cabbage, and beets is common, and desserts often include pastries and cakes.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/poland-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab125"
+    },
+    "strArea": "Russian",
+    "strAreaDescription": "Russian cuisine is diverse, with influences from Eastern Europe, Siberia, and the Caucasus. Borscht (beet soup), pelmeni (dumplings), and blini (thin pancakes) are staples. Pickled vegetables and cured meats are also common.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/russia-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab126"
+    },
+    "strArea": "Spanish",
+    "strAreaDescription": "Spanish cuisine varies by region but often includes staples like paella, tapas, and chorizo. Olive oil, garlic, and saffron are frequently used, and the country is known for its extensive wine and cheese offerings.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab120"
+    },
+    "strArea": "Malaysian",
+    "strAreaDescription": "Malaysian cuisine is a blend of Malay, Chinese, Indian, and indigenous influences. Nasi lemak (coconut rice with anchovies and peanuts), laksa, and satay are popular. The use of aromatic herbs and spices is a defining feature.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/malaysia-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11a"
+    },
+    "strArea": "Indian",
+    "strAreaDescription": "Indian cuisine is diverse and varies by region. Spices play a crucial role, and dishes like curry, biryani, and dosa showcase the breadth of flavors. Vegetarian options are abundant, and bread such as naan and roti complement many meals.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/india-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab117"
+    },
+    "strArea": "Filipino",
+    "strAreaDescription": "Filipino cuisine blends indigenous flavors with Spanish, Chinese, and American influences. Adobo (marinated meat), sinigang (sour soup), and lechon (roast pig) are popular. Rice is a staple, and tropical fruits play a prominent role in desserts.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/philippines-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab115"
+    },
+    "strArea": "Dutch",
+    "strAreaDescription": "Dutch cuisine features hearty meals with staples like potatoes, vegetables, and various meats. Dutch cheese is renowned globally, and the Netherlands is famous for its pancakes, herring, and stroopwafels (thin waffle cookies with syrup).",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/netherlands-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab127"
+    },
+    "strArea": "Thai",
+    "strAreaDescription": "Thai cuisine is known for its balance of sweet, salty, sour, and spicy flavors. Pad Thai, green curry, and som tum (papaya salad) are popular. Ingredients like lemongrass, galangal, and fish sauce add distinctive Thai aromas.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/thailand-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab112"
+    },
+    "strArea": "Canadian",
+    "strAreaDescription": "Canadian cuisine is a fusion of indigenous ingredients and global influences. Maple syrup is a staple, and dishes like poutine (fries with cheese curds and gravy) showcase the country's love for comfort food. Seafood is also prominent, given Canada's extensive coastlines.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/canada-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab116"
+    },
+    "strArea": "Egyptian",
+    "strAreaDescription": "Egyptian cuisine draws on a rich history, featuring dishes like koshari (a mix of rice, lentils, and pasta), falafel, and ful medames (fava beans). Spices like cumin and coriander add depth to many dishes.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/egypt-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11d"
+    },
+    "strArea": "Jamaican",
+    "strAreaDescription": "Jamaican cuisine is a vibrant fusion of African, Indian, and Caribbean flavors. Jerk seasoning, ackee and saltfish, and curry goat are popular. Coconut milk, plantains, and scotch bonnet peppers add distinctive Caribbean flair.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab11b"
+    },
+    "strArea": "Irish",
+    "strAreaDescription": "Irish cuisine is known for its comforting and hearty dishes. Classics include Irish stew, colcannon (mashed potatoes with cabbage), and soda bread. Seafood is also prominent due to Ireland's extensive coastline.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/ireland-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab128"
+    },
+    "strArea": "Tunisian",
+    "strAreaDescription": "Tunisian cuisine is a blend of Mediterranean and North African flavors. Couscous, brik (stuffed pastry), and tagine are common. Harissa, a spicy chili paste, is a key ingredient, and seafood is prevalent along the coast.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/tunisia-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab12b"
+    },
+    "strArea": "Vietnamese",
+    "strAreaDescription": "Vietnamese cuisine is celebrated for its fresh and vibrant flavors. Pho, a fragrant noodle soup, is a national favorite, along with banh mi (Vietnamese sandwich) and goi cuon (spring rolls). The use of herbs, fish sauce, and a balance of sweet, salty, sour, and umami flavors defines Vietnamese culinary traditions.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/vietnam-flag-png-large.png"
+  },
+  {
+    "_id": {
+      "$oid": "656ffe4b57462434ac2ab122"
+    },
+    "strArea": "Moroccan",
+    "strAreaDescription": "Moroccan cuisine is a rich tapestry of flavors, with dishes like tagine (slow-cooked stew), couscous, and pastilla (a savory pastry). Spices like cumin, coriander, and saffron are integral to Moroccan cooking.",
+    "strAreaThumb": "https://www.countryflags.com/wp-content/uploads/morocco-flag-png-large.png"
+  }
+]

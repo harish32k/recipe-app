@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setUser } from "../userReducers.js";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "../../App.css";
+import logo from "../../Images/orange.png";
 
 function Signin() {
   const [error, setError] = useState("");
@@ -41,8 +42,17 @@ function Signin() {
     <div>
       <Container>
         <Row className="justify-content-center align-items-center">
+          {/* <img
+            src={logo}
+            alt="logo"
+            className="logo"
+            style={{
+              width: "auto",
+              height: "50%",
+            }}
+          /> */}
           <Col xs={12} md={6} lg={4}>
-            <h2 className="text-center mb-4 mt-5">Recipe Social Network</h2>
+            <h2 className="text-center mb-4 mt-5">Recipe Hub</h2>
             {/* display error message in red text */}
             {error && <div className="alert alert-danger">{error}</div>}
             <Form>
